@@ -1,0 +1,11 @@
+{
+  "name": "cial-monterrico",
+  "version": "1.0.0",
+  "dependencies": {
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angularjs-datatables": "^0.5.9"
+  }
+}

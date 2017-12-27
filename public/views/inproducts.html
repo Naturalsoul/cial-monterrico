@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col-sm-12" id="alerts">
+        
+    </div>
+</div>
+
+<div class="card">
+    <h4 class="card-header"><i class="fa fa-product-hunt" aria-hidden="true"></i> INGRESO DE PRODUCTOS</h4>
+    <div class="card-body">
+        <form ng-submit="insertProduct()" ng-controller="ProductsController">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i> Datos Principales
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-code">Código Interno</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="formData.internalCode" class="form-control" placeholder="Codigo Interno del Producto" aria-label="Codigo Interno del Producto" aria-describedby="product-code-addon" id="product-code" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-proveedor-code">Código Proveedor</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-proveedor-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="formData.providerCode" class="form-control" placeholder="Codigo Proveedor del Producto" aria-label="Codigo Proveedor del Producto" aria-describedby="product-proveedor-code-addon" id="product-proveedor-code">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-name">Nombre del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="formData.name" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-provider">Proveedor del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-provider-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="formData.provider" class="form-control" placeholder="Proveedor del Producto" aria-label="Proveedor del Producto" aria-describedby="product-provider-addon" id="product-provider" list="providersList" required>
+                                        </div>
+                                    </div>
+                                    <datalist id="providersList">
+                                        <option ng-repeat="provider in providers" value="{{provider}}"></option>
+                                    </datalist>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-stock">Stock actual del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-stock-addon">#</span>
+                                            <input type="number" ng-model="formData.stock" min="1" class="form-control" placeholder="Stock actual del Producto" aria-label="Stock actual del Producto" aria-describedby="product-stock-addon" id="product-stock" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-minimum-stock">Stock mínimo del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-minimum-stock-addon">#</span>
+                                            <input type="number" ng-model="formData.minimumStock" min="1" class="form-control" placeholder="Stock mínimo del Producto" aria-label="Stock mínimo del Producto" aria-describedby="product-minimum-stock-addon" id="product-minimum-stock" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header"><i class="fa fa-calculator" aria-hidden="true"></i> Neto e IVA</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-neto">Precio Neto del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-neto-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="number" min="1" ng-model="formData.neto" ng-change="calculateMoney()" class="form-control" placeholder="Precio Neto del Producto" aria-label="Precio Neto del Producto" aria-describedby="product-neto-addon" id="product-neto" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-iva">IVA del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-iva-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="number" min="1" ng-model="formData.iva" class="form-control" placeholder="IVA del Producto" aria-label="IVA del Producto" aria-describedby="product-iva-addon" id="product-iva" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-iva-neto">IVA + Neto del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-iva-neto-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="number" min="1" ng-model="formData.ivaNeto" class="form-control" placeholder="IVA + Neto del Producto" aria-label="IVA + Neto del Producto" aria-describedby="product-iva-neto-addon" id="product-iva-neto" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header"><i class="fa fa-money" aria-hidden="true"></i> Precios Finales</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-total-minimo">Total Mínimo del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-total-minimo-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="number" min="1" ng-model="formData.minimumTotal" class="form-control" placeholder="Total Mínimo del Producto" aria-label="Total Mínimo del Producto" aria-describedby="product-total-minimo-addon" id="product-total-minimo" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-venta">Precio de Venta del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-venta-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="number" min="1" ng-model="formData.sellPrice" class="form-control" placeholder="Precio de Venta del Producto" aria-label="Precio de Venta del Producto" aria-describedby="product-venta-addon" id="product-venta" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary float-right">Registrar Producto</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
