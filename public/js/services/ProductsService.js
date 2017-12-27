@@ -36,6 +36,36 @@ angular.module('ProductsService', []).factory('ProductsService', ['$http', "$loc
                     console.log(err)
                     next(false)
                 })
+        },
+        
+        findOne: function (productCode, next) {
+            $http.post("/api/getproduct", {internalCode: productCode})
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next(false)
+                })
+        },
+        
+        update: function (data, next) {
+            $http.put("/api/upproduct", data)
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next(false)
+                })
+        },
+        
+        disable: function (internalCode, next) {
+            $http.put("/api/disproduct", {internalCode: internalCode})
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next(false)
+                })
         }
     }
 }])

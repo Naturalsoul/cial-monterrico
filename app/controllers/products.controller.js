@@ -51,6 +51,18 @@ module.exports = {
         })
     },
     
+    findOne: function (internalCode, next) {
+        Products.findOne({internalCode: internalCode}, function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next(data)
+            } else {
+                next({})
+            }
+        })
+    },
+    
     findProviders: function (next) {
         Products.find({}, "provider", function (err, data) {
             if (err) throw err
@@ -60,6 +72,38 @@ module.exports = {
             } else {
                 next({})
             }
+        })
+    },
+    
+    update: function (product, next) {
+        Products.update({internalCode: product.internalCode}, {
+            $set: {
+                providerCode: product.providerCode,
+                name: product.name,
+                provider: product.provider,
+                stock: product.stock,
+                minimumStock: product.minimumStock,
+                neto: product.neto,
+                iva: product.iva,
+                ivaNeto: product.ivaNeto,
+                minimumTotal: product.minimumTotal,
+                sellPrice: product.sellPrice,
+                state: product.state
+            }
+        }, function (err, data) {
+            if (err) throw err
+            
+            next({updated: true})
+        })
+    },
+    
+    disable: function (internalCode, next) {
+        Products.update({internalCode: internalCode}, {
+            $set: {state: false}
+        }, function (err, data) {
+            if (err) throw err
+            
+            next({disabled: true})
         })
     }
 }

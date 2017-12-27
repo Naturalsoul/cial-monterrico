@@ -48,21 +48,63 @@ module.exports = function (app) {
      */
      
     app.get("/api/getproducts", function (req, res) {
-        Products.find(function (results) {
-            res.json(results)
-        })
+        if (req.session.logged) {
+            Products.find(function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json({})
+        }
     })
      
     app.get("/api/getproviders", function (req, res) {
-        Products.findProviders(function (results) {
-            res.json(results)
-        })
+        if (req.session.logged) {
+            Products.findProviders(function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json({})
+        }
     })
      
     app.post("/api/inproducts", function (req, res) {
-        Products.insert(req.body, function (results) {
-            res.json(results)
-        })
+        if (req.session.logged) {
+            Products.insert(req.body, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json({})
+        }
+    })
+    
+    app.post("/api/getproduct", function (req, res) {
+        if (req.session.logged) {
+            Products.findOne(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json({})
+        }
+    })
+    
+    app.put("/api/upproduct", function (req, res) {
+        if (req.session.logged) {
+            Products.update(req.body, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json({})
+        }
+    })
+    
+    app.put("/api/disproduct", function (req, res) {
+        if (req.session.logged) {
+            Products.disable(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json({})
+        }
     })
     
     app.get("*", function (req, res) {

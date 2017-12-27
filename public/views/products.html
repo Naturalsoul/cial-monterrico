@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<table id="productsTable" class="table table-responsive table-bordered table-sm" ng-controller="ProductsController">
+<table id="productsTable" class="table table-responsive table-bordered table-sm" ng-controller="ProductsController" ng-init="loadTableData()">
   <thead class="thead-dark">
     <tr>
       <th scope="col" class="align-middle text-center">
@@ -23,86 +23,85 @@
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'providerCode'; sortReverse = !sortReverse" class="text-white">
           Código Proveedor
-          <span ng-show="sortType == 'providerCode'; sortReverse = !sortReverse" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'providerCode' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'providerCode' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
-      <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse" class="text-white">
           Nombre del Producto
-          <span ng-show="sortType == 'name'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'provider'; sortReverse = !sortReverse" class="text-white">
           Proveedor del Producto
-          <span ng-show="sortType == 'provider'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'provider' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'provider' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'stock'; sortReverse = !sortReverse" class="text-white">
           Stock Actual
-          <span ng-show="sortType == 'stock'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'stock' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'stock' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'minimumStock'; sortReverse = !sortReverse" class="text-white">
           Stock Mínimo
-          <span ng-show="sortType == 'minimumStock'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'minimumStock' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'minimumStock' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'neto'; sortReverse = !sortReverse" class="text-white">
           Precio Neto
-          <span ng-show="sortType == 'neto'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'neto' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'neto' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'iva'; sortReverse = !sortReverse" class="text-white">
           Precio IVA
-          <span ng-show="sortType == 'iva'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'iva' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'iva' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'ivaNeto'; sortReverse = !sortReverse" class="text-white">
           Neto + IVA
-          <span ng-show="sortType == 'ivaNeto'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'ivaNeto' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'ivaNeto' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'minimumTotal'; sortReverse = !sortReverse" class="text-white">
           Precio Mínimo
-          <span ng-show="sortType == 'minimumTotal'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'minimumTotal' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'minimumTotal' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'sellPrice'; sortReverse = !sortReverse" class="text-white">
           Precio de Venta
-          <span ng-show="sortType == 'sellPrice'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'sellPrice' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'sellPrice' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'creationDate'; sortReverse = !sortReverse" class="text-white">
           Fecha de Ingreso
-          <span ng-show="sortType == 'creationDate'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'creationDate' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'creationDate' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
         <a href="#" ng-click="sortType = 'state'; sortReverse = !sortReverse" class="text-white">
           Estado
-          <span ng-show="sortType == 'state'" class="fa fa-caret-down"></span>
-          <span ng-show="sortType == && sortReverse" class="fa fa-caret-up"></span>
+          <span ng-show="sortType == 'state' && !sortReverse" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'state' && sortReverse" class="fa fa-caret-up"></span>
         </a>
       </th>
       <th scope="col" class="align-middle text-center">
@@ -129,8 +128,8 @@
             <span ng-if="product.state == false" class="badge badge-danger">Inactivo</span>
         </td>
         <td class="align-middle text-center">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <i class="fa fa-minus-circle" aria-hidden="true"></i>
+            <a ng-href="/editproducts/{{product.internalCode}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <a href="" ng-click="disableProduct(product.internalCode)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
         </td>
     </tr>
   </tbody>

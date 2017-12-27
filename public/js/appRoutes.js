@@ -22,6 +22,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: "views/products.html",
             controller: "ProductsController"
         })
+        
+        .when("/editproducts/:productCode", {
+            templateUrl: "views/editproducts.html",
+            controller: "ProductsController"
+        })
     
     $locationProvider.html5Mode(true);
 
