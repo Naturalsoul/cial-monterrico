@@ -129,7 +129,7 @@
         </td>
         <td class="align-middle text-center">
             <a ng-href="/editproducts/{{product.internalCode}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-            <a href="" ng-click="disableProduct(product.internalCode)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+            <a href="" ng-click="disableProduct(product.internalCode)" ng-if="product.state == true"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
         </td>
     </tr>
   </tbody>

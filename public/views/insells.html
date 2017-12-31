@@ -1,0 +1,121 @@
+<div class="card" ng-init="loadInsertData()">
+  <h4 class="card-header">
+    <i class="fa fa-money" aria-hidden="true"></i> INGRESO DE VENTAS
+  </h4>
+  <div class="card-body">
+      <form ng-submit="insert()" ng-controller="SellsController">
+        <div class="row">
+          <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+              <label for="internalCode">
+                Código Interno de la Venta
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon" id="sell-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                <input type="text" ng-model="formData.internalCode" class="form-control" placeholder="Codigo Interno de la Venta" aria-label="Codigo Interno de la Venta" aria-describedby="sell-code-addon" id="sell-code" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+              <label for="total-price">
+                Venta Total
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon" id="total-price-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                <input type="number" min="1" ng-model="formData.totalPrice" class="form-control" placeholder="Venta Total" aria-label="Venta Total" aria-describedby="total-price-addon" id="total-price" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+              <label for="add-product">
+                Añadir otro Producto a la Venta
+              </label>
+              <div class="input-group">
+                <button type="button" class="btn btn-primary" id="add-product" ng-click="addProduct()">Añadir Producto</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+              <label for="insert-sell">
+                Registrar Venta
+              </label>
+              <div class="input-group">
+                <button type="submit" class="btn btn-success" id="insert-sell">Registrar Venta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4" ng-repeat="product in formData.products">
+            <div class="card">
+              <div class="card-header">
+                <i class="fa fa-file-o" aria-hidden="true"></i> Producto Nº {{$index + 1}}
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="internalCodeProduct">
+                        Código Interno
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="product-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                        <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Código Interno del Producto" aria-label="Código Interno del Producto" aria-describedby="product-code-addon" id="product-code" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="product-name">
+                        Nombre
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="product-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="product-stock">
+                        Stock Disponible
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="product-stock-addon">#</span>
+                        <input type="number" min="0" ng-model="stockDisponible" class="form-control" placeholder="Cantidad de Stock Disponible" aria-label="Cantidad de Stock Disponible" aria-describedby="product-stock-addon" id="product-stock" readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="product-sells">
+                        Cantidad Vendida
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="product-sells-addon">#</span>
+                        <input type="number" ng-max="stockDisponible" min="1" class="form-control" placeholder="Cantidad del Producto Vendido" aria-label="Cantidad del Producto Vendido" aria-describedby="product-sells-addon" id="product-sells" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label for="product-total-price">
+                        Precio Total de estos Productos
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="product-total-price-addon">#</span>
+                        <input type="number" min="1" class="form-control" placeholder="Precio Total de estos Productos" aria-label="Precio Total de estos Productos" aria-describedby="product-total-price-addon" id="product-total-price" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>

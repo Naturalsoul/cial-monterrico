@@ -27,6 +27,16 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: "views/editproducts.html",
             controller: "ProductsController"
         })
+        
+        .when("/insells", {
+            templateUrl: "views/insells.html",
+            controller: "SellsController"
+        })
+        
+        .when("/sells", {
+            templateUrl: "views/sells.html",
+            controller: "SellsController"
+        })
     
     $locationProvider.html5Mode(true);
 

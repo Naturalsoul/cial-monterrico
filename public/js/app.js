@@ -1,4 +1,15 @@
-angular.module('cial-monterrico', ['ngRoute', 'appRoutes', 'MainCtrl', 'UserCtrl', "LoginCtrl", "ProductsCtrl", 'UserService', "AuthService", "ProductsService"])
+angular.module('cial-monterrico', ['ngRoute',
+                                   'appRoutes',
+                                   'MainCtrl',
+                                   'UserCtrl',
+                                   "LoginCtrl",
+                                   "ProductsCtrl",
+                                   "SellsCtrl",
+                                   'UserService',
+                                   "AuthService",
+                                   "ProductsService",
+                                   "SellsService"
+                                   ])
 
 .run(["$rootScope", "$location", "Auth", function ($rootScope, $location, Auth) {
     $rootScope.$on("$routeChangeStart", function (e) {
