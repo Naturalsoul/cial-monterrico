@@ -8,6 +8,10 @@ angular.module("SellsCtrl", []).controller("SellsController", ["$scope", "SellsS
             totalPrice: 0
         }
         
+        SellsService.findProductsInfo(function (data) {
+            console.log(data)
+        })
+        
         $scope.addProduct = function () {
             $scope.formData.products.push({})
         }

@@ -48,6 +48,14 @@
             </div>
           </div>
         </div>
+        
+        <!-- Datalists -->
+        
+        <datalist id="internalCodes"></datalist>
+        <datalist id="names"></datalist>
+        
+        <!-- Datalists -->
+        
         <div class="row">
           <div class="col-sm-12 col-md-4" ng-repeat="product in formData.products">
             <div class="card">
@@ -63,7 +71,7 @@
                       </label>
                       <div class="input-group">
                         <span class="input-group-addon" id="product-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
-                        <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Código Interno del Producto" aria-label="Código Interno del Producto" aria-describedby="product-code-addon" id="product-code" required>
+                        <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Código Interno del Producto" aria-label="Código Interno del Producto" aria-describedby="product-code-addon" id="product-code" list="internalCodes" required>
                       </div>
                     </div>
                   </div>
@@ -74,7 +82,7 @@
                       </label>
                       <div class="input-group">
                         <span class="input-group-addon" id="product-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
+                        <input type="text" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" list="names" required>
                       </div>
                     </div>
                   </div>

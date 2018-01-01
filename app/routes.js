@@ -2,6 +2,7 @@
 
 var Users       = require("./controllers/users.controller")
 var Products    = require("./controllers/products.controller")
+var Sells       = require("./controllers/sells.controller")
 
 // ------------------
 
@@ -100,6 +101,22 @@ module.exports = function (app) {
     app.put("/api/disproduct", function (req, res) {
         if (req.session.logged) {
             Products.disable(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json({})
+        }
+    })
+    
+    /* 
+     * --------------------------------------------------------------------------
+     * Sells
+     * --------------------------------------------------------------------------
+     */
+     
+    app.get("/api/findproductsinfo", function (req, res) {
+        if (req.session.logged) {
+            Sells.findProductsInfo(function (results) {
                 res.json(results)
             })
         } else {
