@@ -37,6 +37,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: "views/sells.html",
             controller: "SellsController"
         })
+        
+        .otherwise({
+            redirectTo: "/"
+        })
     
     $locationProvider.html5Mode(true);
 

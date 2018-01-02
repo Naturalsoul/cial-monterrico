@@ -1,4 +1,5 @@
 let Sells = require("./../models/sells.model")
+let Products = require("./../models/products.model")
 
 module.exports = {
     exists: function (internalCode, next) {
@@ -26,19 +27,54 @@ module.exports = {
                 
                 newSell.save()
                 
+                sell.products.forEach(function (e) {
+                    Products.update({internalCode: e.internalCode},
+                                    {$inc: {stock: (e.quantitySold * -1)}},
+                                    function (err, data) {
+                                        if (err) throw err
+                                    })
+                })
+                
                 next({registered: true})
             }
         })
     },
     
-    findProductsInfo: function (next) {
-        Sells.find({state: true}, "internalCode name provider stock minimumStock minimumTotal sellPrice", function (err, data) {
+    findInternalCodeAndName: function (next) {
+        Products
+            .find({state: true})
+            .select("internalCode name")
+            .exec(function (err, data) {
+                if (err) throw err
+                
+                if (data != null) {
+                    next(data)
+                } else {
+                    next([])
+                }
+            })
+    },
+    
+    findProductInfoByCode: function (internalCode, next) {
+        Products.findOne({internalCode: internalCode}, "name stock minimumTotal sellPrice" , function (err, data) {
             if (err) throw err
             
             if (data != null) {
                 next(data)
             } else {
-                next({})
+                next([])
+            }
+        })
+    },
+    
+    findProductInfoByName: function (name, next) {
+        Products.findOne({name: name}, "internalCode stock minimumTotal sellPrice", function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next(data)
+            } else {
+                next([])
             }
         })
     }

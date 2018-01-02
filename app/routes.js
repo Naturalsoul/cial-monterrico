@@ -54,7 +54,7 @@ module.exports = function (app) {
                 res.json(results)
             })
         } else {
-            res.json({})
+            res.json([])
         }
     })
      
@@ -64,7 +64,7 @@ module.exports = function (app) {
                 res.json(results)
             })
         } else {
-            res.json({})
+            res.json([])
         }
     })
      
@@ -74,7 +74,7 @@ module.exports = function (app) {
                 res.json(results)
             })
         } else {
-            res.json({})
+            res.json([])
         }
     })
     
@@ -84,7 +84,7 @@ module.exports = function (app) {
                 res.json(results)
             })
         } else {
-            res.json({})
+            res.json([])
         }
     })
     
@@ -94,7 +94,7 @@ module.exports = function (app) {
                 res.json(results)
             })
         } else {
-            res.json({})
+            res.json([])
         }
     })
     
@@ -104,7 +104,7 @@ module.exports = function (app) {
                 res.json(results)
             })
         } else {
-            res.json({})
+            res.json([])
         }
     })
     
@@ -114,13 +114,43 @@ module.exports = function (app) {
      * --------------------------------------------------------------------------
      */
      
-    app.get("/api/findproductsinfo", function (req, res) {
+    app.get("/api/findinternalcodeandname", function (req, res) {
         if (req.session.logged) {
-            Sells.findProductsInfo(function (results) {
+            Sells.findInternalCodeAndName(function (results) {
                 res.json(results)
             })
         } else {
-            res.json({})
+            res.json([])
+        }
+    })
+    
+    app.post("/api/findproductinfobycode", function (req, res) {
+        if (req.session.logged) {
+            Sells.findProductInfoByCode(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.post("/api/findproductinfobyname", function (req, res) {
+        if (req.session.logged) {
+            Sells.findProductInfoByName(req.body.name, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.post("/api/insell", function (req, res) {
+        if (req.session.logged) {
+            Sells.insert(req.body, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
         }
     })
     

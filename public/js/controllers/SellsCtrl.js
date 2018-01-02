@@ -1,19 +1,127 @@
-angular.module("SellsCtrl", []).controller("SellsController", ["$scope", "SellsService", function ($scope, SellsService) {
+angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$scope", "SellsService", "$ngConfirm", function ($scope, SellsService, $ngConfirm) {
     $scope.loadInsertData = function () {
         $scope.formData = {
             internalCode: "",
-            products: [{
-                internalCode: ""
-            }],
+            products: [],
             totalPrice: 0
         }
         
-        SellsService.findProductsInfo(function (data) {
-            console.log(data)
+        $scope.product = {
+            internalCode: "",
+            name: "",
+            stock: 0,
+            quantitySold: 1,
+            minimumTotal: 0,
+            price: 0,
+            originalPrice: 0
+        }
+        
+        $scope.productsInternalCode = []
+        $scope.productsName = []
+        
+        SellsService.findInternalCodeAndName(function (data) {
+            data.forEach(function (e) {
+                $scope.productsInternalCode.push(e.internalCode)
+                $scope.productsName.push(e.name)
+            })
         })
         
+        $scope.findProductInfoByCode = function () {
+            if ($scope.productsInternalCode.indexOf($scope.product.internalCode) != -1) {
+                SellsService.findProductInfoByCode($scope.product.internalCode, function (res) {
+                    $scope.product.name = res.name
+                    $scope.product.stock = res.stock
+                    $scope.product.minimumTotal = res.minimumTotal
+                    $scope.product.price = res.sellPrice
+                    $scope.product.originalPrice = res.sellPrice
+                })
+            }
+        }
+        
+        $scope.findProductInfoByName = function () {
+            if ($scope.productsName.indexOf($scope.product.name) != -1) {
+                SellsService.findProductInfoByName($scope.product.name, function (res) {
+                    $scope.product.internalCode = res.internalCode
+                    $scope.product.stock = res.stock
+                    $scope.product.minimumTotal = res.minimumTotal
+                    $scope.product.price = res.sellPrice
+                    $scope.product.originalPrice = res.sellPrice
+                })
+            }
+        }
+        
+        $scope.multiplySellPrice = function () {
+            if ($scope.product.quantitySold >= 1) {
+                $scope.product.price = $scope.product.originalPrice
+                $scope.product.price *= $scope.product.quantitySold
+            }
+        }
+        
         $scope.addProduct = function () {
-            $scope.formData.products.push({})
+            let ok = $scope.productsInternalCode.indexOf($scope.product.internalCode) != -1 &&
+                     $scope.productsName.indexOf($scope.product.name) != -1 &&
+                     $scope.product.stock >= 1 &&
+                     $scope.product.quantitySold >= 1 &&
+                     $scope.product.price >= 1
+                     
+            for (let i = 0; i < $scope.formData.products.length; i++) {
+                if ($scope.formData.products[i].internalCode == $scope.product.internalCode) {
+                    ok = false
+                    break
+                }
+            }
+                     
+            if (ok) {
+                $scope.formData.products.push({
+                    internalCode: $scope.product.internalCode,
+                    quantitySold: $scope.product.quantitySold,
+                    sellPrice: $scope.product.price
+                })
+                
+                $scope.formData.totalPrice += $scope.product.price
+                
+                $scope.product = {
+                    internalCode: "",
+                    name: "",
+                    stock: 0,
+                    quantitySold: 1,
+                    minimumTotal: 0,
+                    price: 0,
+                    originalPrice: 0
+                }
+                
+                $ngConfirm("Producto registrado en la Venta. Recuerde registrar la Venta antes de cambiar o cerrar esta página para que los datos se actualizen correctamente.", "Exito!")
+            } else {
+                $ngConfirm("Los datos ingresados para el Producto son incorrectos o ya se encuentra registrado en esta Venta.", "Que mal :(")
+            }
+        }
+        
+        $scope.removeProduct = function (internalCode) {
+            for (let i = 0; i < $scope.formData.products.length; i++) {
+                if ($scope.formData.products[i].internalCode == internalCode) {
+                    $scope.formData.totalPrice -= $scope.formData.products[i].sellPrice
+                    $scope.formData.products.splice(i, 1)
+                }
+            }
+        }
+        
+        $scope.insert = function () {
+            if ($scope.formData.products.length >= 1) {
+                SellsService.insert($scope.formData, function (res) {
+                    if (res.registered) {
+                        $ngConfirm("Venta Registrada!", "Exito!")
+                        $scope.formData = {
+                            internalCode: "",
+                            products: [],
+                            totalPrice: 0
+                        }
+                    } else {
+                        $ngConfirm("Ha ocurrido un error en la operación. Asegurese que el Código Interno de la Venta no esté ocupado.", "Que mal :(")
+                    }
+                })
+            } else {
+                $ngConfirm("Debe agregar productos a la Venta.", "Que mal :(")
+            }
         }
     }
 }])
