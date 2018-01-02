@@ -38,6 +38,16 @@ angular.module("SellsService", []).factory("SellsService", ["$http", function ($
                     console.log(err)
                     next([])
                 })
+        },
+        
+        find: function (next) {
+            $http.get("/api/getsells")
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
         }
     }
 }])

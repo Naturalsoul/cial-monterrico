@@ -124,4 +124,20 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
             }
         }
     }
+    
+    $scope.loadTableData = function () {
+        $scope.products = []
+        
+        SellsService.find(function (res) {
+            $scope.sells = res
+        })
+        
+        $scope.showProducts = function (products) {
+            $scope.products = products
+            
+            console.log($scope.products)
+            
+            $("#productsModal").modal()
+        }
+    }
 }])

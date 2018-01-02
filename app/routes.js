@@ -154,6 +154,16 @@ module.exports = function (app) {
         }
     })
     
+    app.get("/api/getsells", function (req, res) {
+        if (req.session.logged) {
+            Sells.find(function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
     app.get("*", function (req, res) {
         res.sendFile("index.html", {root: __dirname + "/../public/"})
     })

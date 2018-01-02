@@ -77,5 +77,17 @@ module.exports = {
                 next([])
             }
         })
+    },
+    
+    find: function (next) {
+        Sells.find({}, function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next(data)
+            } else {
+                next([])
+            }
+        })
     }
 }
