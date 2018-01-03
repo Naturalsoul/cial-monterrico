@@ -1,9 +1,10 @@
-angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$scope", "SellsService", "$ngConfirm", function ($scope, SellsService, $ngConfirm) {
+angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$scope", "SellsService", "$ngConfirm", "$route", function ($scope, SellsService, $ngConfirm, $route) {
     $scope.loadInsertData = function () {
         $scope.formData = {
             internalCode: "",
             products: [],
-            totalPrice: 0
+            totalPrice: 0,
+            creationDate: Date.now()
         }
         
         $scope.product = {
@@ -138,6 +139,38 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
             console.log($scope.products)
             
             $("#productsModal").modal()
+        }
+        
+        $scope.removeSell = function (internalCode, products) {
+            $ngConfirm({
+                theme: "bootstrap",
+                animation: "Rotate",
+                closeAnimation: "zoom",
+                title: "Eliminar la Venta Nº " + internalCode,
+                content: "¿Está seguro de eliminar la Venta?",
+                scope: $scope,
+                buttons: {
+                    aceptar: {
+                        text: "Aceptar",
+                        btnClass: "btn-green",
+                        action: function (scope, button) {
+                            SellsService.remove(internalCode, products, function (res) {
+                                if (res.removed) {
+                                    $ngConfirm("La venta ha sido eliminada.", "Éxito!")
+                                    $route.reload()
+                                } else {
+                                    $ngConfirm("Ha habido un error en la operación.", "Que mal :(")
+                                }
+                                
+                                return false
+                            })
+                        }
+                    },
+                    close: function (scope, button) {
+                        text: "Cerrar"
+                    }
+                }
+            })
         }
     }
 }])

@@ -48,6 +48,16 @@ angular.module("SellsService", []).factory("SellsService", ["$http", function ($
                     console.log(err)
                     next([])
                 })
+        },
+        
+        remove: function (internalCode, products, next) {
+            $http.put("/api/delsell", {internalCode: internalCode, products: products})
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
         }
     }
 }])

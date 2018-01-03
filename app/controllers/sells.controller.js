@@ -22,7 +22,8 @@ module.exports = {
                 let newSell = new Sells({
                     internalCode: sell.internalCode,
                     products: sell.products,
-                    totalPrice: sell.totalPrice
+                    totalPrice: sell.totalPrice,
+                    creationDate: sell.creationDate
                 })
                 
                 newSell.save()
@@ -88,6 +89,22 @@ module.exports = {
             } else {
                 next([])
             }
+        })
+    },
+    
+    remove: function (internalCode, products, next) {
+        Sells.remove({internalCode: internalCode}, function (err, data) {
+            if (err) throw err
+            
+            products.forEach(function (e) {
+                Products.update({internalCode: e.internalCode},
+                                {$inc: {stock: e.quantitySold}},
+                                function (err, data) {
+                                    if (err) throw err
+                                })
+            })
+            
+            next({removed: true})
         })
     }
 }
