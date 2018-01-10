@@ -1,8 +1,68 @@
 <div class="card" ng-controller="OffersController" ng-init="loadInsertData()">
-    <div class="card-header">
+    <h4 class="card-header">
         <i class="fa fa-percent" aria-hidden="true"></i> INGRESAR OFERTAS
-    </div>
+    </h4>
     <div class="card-body">
-        
+        <form ng-submit="insert()">
+            <div class="row">
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <label for="offer-code">
+                            Código Interno
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                            <input type="text" ng-model="formData.internalCode" class="form-control" placeholder="Codigo Interno de la Oferta" aria-label="Codigo Interno de la Oferta" aria-describedby="offer-code-addon" id="offer-code" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Agregar Producto a la Oferta
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label for="product-code">
+                                            Código Interno del Producto
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Codigo Interno del Producto" aria-label="Codigo Interno del Producto" aria-describedby="product-code-addon" id="product-code" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label for="product-name">
+                                            Nombre del Producto
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label for="product-original-price">
+                                            Precio Original del Producto
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-original-price-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Precio Original del Producto" aria-label="Precio Original del Producto" aria-describedby="product-original-price-addon" id="product-original-price" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
