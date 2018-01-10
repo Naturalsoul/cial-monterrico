@@ -10,6 +10,7 @@ module.exports = db.model("Products", {
     ivaNeto: {type: Number, min: 1},
     minimumTotal: {type: Number, min: 1},
     sellPrice: {type: Number, min: 1},
+    offerPrice: {type: Number, default: 0},
     stock: {type: Number, min: 1},
     minimumStock: {type: Number, min: 1},
     state: {type: Boolean, default: true},

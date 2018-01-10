@@ -57,7 +57,7 @@ module.exports = {
     },
     
     findProductInfoByCode: function (internalCode, next) {
-        Products.findOne({internalCode: internalCode}, "name stock minimumTotal sellPrice" , function (err, data) {
+        Products.findOne({internalCode: internalCode}, "name stock minimumTotal sellPrice offerPrice" , function (err, data) {
             if (err) throw err
             
             if (data != null) {
@@ -69,7 +69,7 @@ module.exports = {
     },
     
     findProductInfoByName: function (name, next) {
-        Products.findOne({name: name}, "internalCode stock minimumTotal sellPrice", function (err, data) {
+        Products.findOne({name: name}, "internalCode stock minimumTotal sellPrice offerPrice", function (err, data) {
             if (err) throw err
             
             if (data != null) {

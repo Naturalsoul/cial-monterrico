@@ -33,8 +33,8 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
                     $scope.product.name = res.name
                     $scope.product.stock = res.stock
                     $scope.product.minimumTotal = res.minimumTotal
-                    $scope.product.price = res.sellPrice
-                    $scope.product.originalPrice = res.sellPrice
+                    $scope.product.price = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
+                    $scope.product.originalPrice = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
                 })
             }
         }
@@ -45,8 +45,8 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
                     $scope.product.internalCode = res.internalCode
                     $scope.product.stock = res.stock
                     $scope.product.minimumTotal = res.minimumTotal
-                    $scope.product.price = res.sellPrice
-                    $scope.product.originalPrice = res.sellPrice
+                    $scope.product.price = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
+                    $scope.product.originalPrice = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
                 })
             }
         }
