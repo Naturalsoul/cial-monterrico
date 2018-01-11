@@ -4,6 +4,7 @@ var Users       = require("./controllers/users.controller")
 var Products    = require("./controllers/products.controller")
 var Sells       = require("./controllers/sells.controller")
 var Offers      = require("./controllers/offers.controller")
+var Spendings   = require("./controllers/spendings.controller")
 
 // ------------------
 
@@ -224,6 +225,42 @@ module.exports = function (app) {
     app.put("/api/deloffer", function (req, res) {
         if (req.session.logged) {
             Offers.remove(req.body.internalCode, req.body.internalCodeProduct, req.body.originalPrice, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    /* 
+     * --------------------------------------------------------------------------
+     * Spendings
+     * --------------------------------------------------------------------------
+     */
+     
+    app.post("/api/inspending", function (req, res) {
+        if (req.session.logged) {
+            Spendings.insert(req.body, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.get("/api/getspendings", function (req, res) {
+        if (req.session.logged) {
+            Spendings.find(function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.put("/api/delspending", function (req, res) {
+        if (req.session.logged) {
+            Spendings.remove(req.body.internalCode, function (results) {
                 res.json(results)
             })
         } else {

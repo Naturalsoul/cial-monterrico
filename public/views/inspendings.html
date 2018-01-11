@@ -1,0 +1,139 @@
+<div class="card" ng-init="loadInsertData()" ng-controller="SpendingsController">
+  <h4 class="card-header">
+    <i class="fa fa-credit-card" aria-hidden="true"></i> INGRESO DE GASTOS
+  </h4>
+  <div class="card-body">
+      <form ng-submit="insert()">
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+              <label for="spending-code">
+                Código Interno del Gasto
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon" id="spending-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
+                <input type="text" ng-model="formData.internalCode" class="form-control" placeholder="Codigo Interno del Gasto" aria-label="Codigo Interno del Gasto" aria-describedby="spending-code-addon" id="spending-code" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+              <label for="spending-title">
+                Título General del Gasto
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon" id="spending-title-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                <input type="text" ng-model="formData.title" class="form-control" placeholder="Título General del Gasto" aria-label="Título General del Gasto" aria-describedby="spending-title-addon" id="spending-title" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+              <label for="total-spending">
+                Gasto Total
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon" id="total-spending-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                <input type="number" min="1" ng-model="formData.totalSpending" class="form-control" placeholder="Gasto Total" aria-label="Gasto Total" aria-describedby="total-spending-addon" id="total-spending" required readonly>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+              <label for="add-detail">
+                Registrar Detalle en este Gasto
+              </label>
+              <div class="input-group">
+                <button type="button" class="btn btn-primary" id="add-detail" ng-click="addDetail()">Añadir Detalle</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+              <label for="insert-spending">
+                Registrar Gasto
+              </label>
+              <div class="input-group">
+                <button type="submit" class="btn btn-success" id="insert-spending">Registrar Gasto</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <i class="fa fa-file-o" aria-hidden="true"></i> Agregar Detalles
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="detail-name">
+                        Nombre del Detalle
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="detail-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                        <input type="text" ng-model="detail.name" class="form-control" placeholder="Nombre del Detalle" aria-label="Nombre del Detalle" aria-describedby="detail-name-addon" id="detail-name">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                      <label for="detail-price">
+                        Cantidad Gastada
+                      </label>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="detail-price-addon">$</span>
+                        <input type="number" ng-model="detail.price" class="form-control" placeholder="Cantidad Gastada" aria-label="Cantidad Gastada" aria-describedby="detail-price-addon" id="detail-price">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+      <div class="card" style="margin-top:15px;">
+        <div class="card-header">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i> Detalles Registrados en este Gasto
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-7 offset-md-3">
+              <table class="table table-responsive table-bordered">
+                <thead class="thead-dark">
+                  <tr scope="row">
+                    <th scope="col" class="align-middle text-center">
+                      Nombre del Gasto
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                      Cantidad Gastada
+                    </th>
+                    <th scope="col" class="align-middle text-center">
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr scope="row" ng-repeat="detail in formData.details">
+                    <td scope="col" class="align-middle text-center">
+                      {{detail.name}}
+                    </td>
+                    <td scope="col" class="align-middle text-center">
+                      $ {{detail.price}}
+                    </td>
+                    <td scope="col" class="align-middle text-center">
+                      <a href="#" ng-click="removeDetail(detail.name)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
