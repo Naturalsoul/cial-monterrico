@@ -33,6 +33,8 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
                     $scope.product.name = res.name
                     $scope.product.originalPrice = res.sellPrice
                     $scope.product.minimumTotal = res.minimumTotal
+                    
+                    $scope.calculatePercentagePrice()
                 })
             }
         }
@@ -43,6 +45,8 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
                     $scope.product.internalCode = res.internalCode
                     $scope.product.originalPrice = res.sellPrice
                     $scope.product.minimumTotal = res.minimumTotal
+                    
+                    $scope.calculatePercentagePrice()
                 })
             }
         }
@@ -62,6 +66,24 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
                 OffersService.insert($scope.formData, function (res) {
                     if (res.registered) {
                         $ngConfirm("Oferta registrada con éxito!", "Exito!")
+                        
+                        $scope.formData = {
+                            internalCode: "",
+                            internalCodeProduct: "",
+                            nameProduct: "",
+                            percentage: 0,
+                            originalPrice: 0,
+                            creationDate: null
+                        }
+                        
+                        $scope.product = {
+                            internalCode: "",
+                            name: "",
+                            originalPrice: 0,
+                            offerPrice: 0,
+                            minimumTotal: 0
+                        }
+                        
                     } else {
                         $ngConfirm("Ha habido un error en la operación. Verifique que todos los campos sean correctos. Recuerde que no puede ingresar más de una Oferta por Producto.", "Que mal :(")
                     }
