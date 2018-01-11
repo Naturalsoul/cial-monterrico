@@ -108,8 +108,15 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
                 iva: res.iva,
                 ivaNeto: res.ivaNeto,
                 minimumTotal: res.minimumTotal,
-                sellPrice: res.sellPrice,
-                state: res.state.toString()
+                sellPrice: (res.offerPrice != 0 || (typeof res.offerPrice != "undefined" && res.offerPrice != 0)) ? res.offerPrice : res.sellPrice,
+                state: res.state.toString(),
+                offerPrice: res.offerPrice,
+                originalPrice: res.sellPrice
+            }
+            
+            if (res.offerPrice != 0 || (typeof res.offerPrice != "undefined" && res.offerPrice != 0)) {
+                $("#product-venta").prop("readOnly", true)
+                $("#product-neto").prop("readOnly", true)
             }
         })
         
@@ -124,6 +131,10 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
         }
         
         $scope.updateProduct = function () {
+            if ($scope.formData.offerPrice) {
+                $scope.formData.sellPrice = $scope.formData.originalPrice
+            }
+            
             ProductsService.update($scope.formData, function (res) {
                 
                 $location.path("/products")
