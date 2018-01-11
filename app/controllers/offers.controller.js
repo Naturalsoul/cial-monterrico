@@ -2,20 +2,28 @@ let Offers = require("../models/offers.model")
 let Products = require("../models/products.model")
 
 module.exports = {
-    exists: function (internalCode, next) {
+    exists: function (internalCode, internalCodeProduct, next) {
         Offers.count({internalCode: internalCode}, function (err, count) {
             if (err) throw err
             
             if (count > 0) {
                 next(true)
             } else {
-                next(false)
+                Offers.count({internalCodeProduct: internalCodeProduct}, function (err, count) {
+                    if (err) throw err
+                    
+                    if (count > 0) {
+                        next(true)
+                    } else {
+                        next(false)
+                    }
+                })
             }
         })
     },
     
     insert: function (offer, next) {
-        this.exists(offer.internalCode, function (res) {
+        this.exists(offer.internalCode, offer.internalCodeProduct, function (res) {
             if (res) {
                 next({registered: false})
             } else {

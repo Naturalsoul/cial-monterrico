@@ -52,19 +52,23 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
         }
         
         $scope.insert = function () {
-            $scope.formData.internalCodeProduct = $scope.product.internalCode
-            $scope.formData.nameProduct = $scope.product.name
-            $scope.formData.originalPrice = $scope.product.originalPrice
-            $scope.formData.offerPrice = $scope.product.offerPrice
-            $scope.formData.creationDate = Date.now()
-            
-            OffersService.insert($scope.formData, function (res) {
-                if (res.registered) {
-                    $ngConfirm("Oferta registrada con éxito!", "Exito!")
-                } else {
-                    $ngConfirm("Ha habido un error en la operación. Verifique que todos los campos sean correctos.", "Que mal :(")
-                }
-            })
+            if ($scope.product.offerPrice >= $scope.product.minimumTotal) {
+                $scope.formData.internalCodeProduct = $scope.product.internalCode
+                $scope.formData.nameProduct = $scope.product.name
+                $scope.formData.originalPrice = $scope.product.originalPrice
+                $scope.formData.offerPrice = $scope.product.offerPrice
+                $scope.formData.creationDate = Date.now()
+                
+                OffersService.insert($scope.formData, function (res) {
+                    if (res.registered) {
+                        $ngConfirm("Oferta registrada con éxito!", "Exito!")
+                    } else {
+                        $ngConfirm("Ha habido un error en la operación. Verifique que todos los campos sean correctos. Recuerde que no puede ingresar más de una Oferta por Producto.", "Que mal :(")
+                    }
+                })
+            } else {
+                $ngConfirm("El precio de Oferta debe ser mayor o igual al Precio Mínimo", "Que mal :(")
+            }
         }
     }
 }])
