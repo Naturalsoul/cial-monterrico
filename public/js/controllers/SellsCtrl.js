@@ -136,8 +136,6 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
         $scope.showProducts = function (products) {
             $scope.products = products
             
-            console.log($scope.products)
-            
             $("#productsModal").modal()
         }
         
