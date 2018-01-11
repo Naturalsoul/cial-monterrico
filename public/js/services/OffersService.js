@@ -38,6 +38,30 @@ angular.module("OffersService", []).factory("OffersService", ["$http", function 
                     console.log(err)
                     next([])
                 })
+        },
+        
+        find: function (next) {
+            $http.get("/api/getoffers")
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
+        },
+        
+        remove: function (internalCode, internalCodeProduct, originalPrice, next) {
+            $http.put("/api/deloffer", {
+                internalCode: internalCode,
+                internalCodeProduct: internalCodeProduct,
+                originalPrice: originalPrice
+            })
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
         }
     }
 }])

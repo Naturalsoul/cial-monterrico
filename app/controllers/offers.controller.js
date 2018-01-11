@@ -71,5 +71,32 @@ module.exports = {
                 next([])
             }
         })
+    },
+    
+    find: function (next) {
+        Offers.find({}, function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next(data)
+            } else {
+                next([])
+            }
+        })
+    },
+    
+    remove: function (internalCode, internalCodeProduct, originalPrice, next) {
+        Offers.remove({internalCode: internalCode}, function (err, data) {
+            if (err) throw err
+            
+            Products.update({internalCode: internalCodeProduct}, {
+                sellPrice: originalPrice,
+                offerPrice: 0
+            }, function (err, data) {
+                if (err) throw err
+            })
+            
+            next({removed: true})
+        })
     }
 }

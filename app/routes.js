@@ -211,6 +211,26 @@ module.exports = function (app) {
         }
     })
     
+    app.get("/api/getoffers", function (req, res) {
+        if (req.session.logged) {
+            Offers.find(function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.put("/api/deloffer", function (req, res) {
+        if (req.session.logged) {
+            Offers.remove(req.body.internalCode, req.body.internalCodeProduct, req.body.originalPrice, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
     app.get("*", function (req, res) {
         res.sendFile("index.html", {root: __dirname + "/../public/"})
     })

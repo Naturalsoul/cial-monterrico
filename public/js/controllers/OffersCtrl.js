@@ -71,4 +71,46 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
             }
         }
     }
+    
+    $scope.loadTableData = function () {
+        OffersService.find(function (res) {
+            $scope.offers = res
+            
+            $scope.offers.forEach(function (e) {
+                e.offerPrice = e.originalPrice - (e.originalPrice * (e.percentage / 100))
+            })
+        })
+        
+        $scope.removeOffer = function (internalCode, internalCodeProduct, originalPrice) {
+            $ngConfirm({
+                theme: "bootstrap",
+                animation: "Rotate",
+                closeAnimation: "zoom",
+                title: "Eliminar la Oferta Nº " + internalCode,
+                content: "¿Está seguro de eliminar la Oferta?",
+                scope: $scope,
+                buttons: {
+                    aceptar: {
+                        text: "Aceptar",
+                        btnClass: "btn-green",
+                        action: function (scope, button) {
+                            OffersService.remove(internalCode, internalCodeProduct, originalPrice, function (res) {
+                                if (res.removed) {
+                                    $ngConfirm("La Oferta ha sido eliminada.", "Éxito!")
+                                    $route.reload()
+                                } else {
+                                    $ngConfirm("Ha habido un error en la operación.", "Que mal :(")
+                                }
+                                
+                                return false
+                            })
+                        }
+                    },
+                    close: function (scope, button) {
+                        text: "Cerrar"
+                    }
+                }
+            })
+        }
+    }
 }])
