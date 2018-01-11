@@ -183,7 +183,7 @@ module.exports = function (app) {
     
     app.post("/api/findproductinfopricebycode", function (req, res) {
         if (req.session.logged) {
-            Offers.findProductInfoByCode(req.body.internalCode, function (results) {
+            Offers.findProductInfoPriceByCode(req.body.internalCode, function (results) {
                 res.json(results)
             })
         } else {
@@ -193,7 +193,7 @@ module.exports = function (app) {
     
     app.post("/api/findproductinfopricebyname", function (req, res) {
         if (req.session.logged) {
-            Offers.findProductInfoByName(req.body.name, function (results) {
+            Offers.findProductInfoPriceByName(req.body.name, function (results) {
                 res.json(results)
             })
         } else {

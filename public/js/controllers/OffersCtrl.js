@@ -19,7 +19,7 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
         
         $scope.findProductInfoPriceByCode = function () {
             if ($scope.productsInternalCodes.indexOf($scope.product.internalCode) != -1) {
-                OffersService.findProductInfoByCode($scope.product.internalCode, function (res) {
+                OffersService.findProductInfoPriceByCode($scope.product.internalCode, function (res) {
                     $scope.product.name = res.name
                     $scope.product.originalPrice = res.sellPrice
                 })
@@ -28,9 +28,9 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
         
         $scope.findProductInfoPriceByName = function () {
             if ($scope.productsNames.indexOf($scope.product.name) != -1) {
-                OffersService.findProductInfoByName($scope.product.name, function (res) {
+                OffersService.findProductInfoPriceByName($scope.product.name, function (res) {
                     $scope.product.internalCode = res.internalCode
-                    $scope.product.originalPrice = res.originalPrice
+                    $scope.product.originalPrice = res.sellPrice
                 })
             }
         }
