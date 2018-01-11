@@ -201,6 +201,16 @@ module.exports = function (app) {
         }
     })
     
+    app.post("/api/inoffer", function (req, res) {
+        if (req.session.logged) {
+            Offers.insert(req.body, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
     app.get("*", function (req, res) {
         res.sendFile("index.html", {root: __dirname + "/../public/"})
     })

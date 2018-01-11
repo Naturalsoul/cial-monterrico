@@ -56,6 +56,10 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
     $scope.loadTableData = function () {
         ProductsService.find(function (res) {
             $scope.products = res
+            
+            $scope.products.forEach(function (e) {
+                e.sellPrice = (e.offerPrice != 0 || (typeof e.offerPrice != "undefined" && e.offerPrice != 0)) ? e.offerPrice : e.sellPrice
+            })
         })
         
         $scope.disableProduct = function (internalCode) {

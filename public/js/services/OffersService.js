@@ -28,6 +28,16 @@ angular.module("OffersService", []).factory("OffersService", ["$http", function 
                     console.log(err)
                     next([])
                 })
+        },
+        
+        insert: function (offer, next) {
+            $http.post("/api/inoffer", offer)
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
         }
     }
 }])

@@ -6,7 +6,11 @@ module.exports = {
         Offers.count({internalCode: internalCode}, function (err, count) {
             if (err) throw err
             
-            (count > 0) ? next(true) : next(false)
+            if (count > 0) {
+                next(true)
+            } else {
+                next(false)
+            }
         })
     },
     
@@ -18,6 +22,7 @@ module.exports = {
                 let newOffer = new Offers({
                     internalCode: offer.internalCode,
                     internalCodeProduct: offer.internalCodeProduct,
+                    nameProduct: offer.nameProduct,
                     percentage: offer.percentage,
                     originalPrice: offer.originalPrice,
                     creationDate: offer.creationDate
@@ -37,7 +42,7 @@ module.exports = {
     },
     
     findProductInfoPriceByCode: function (internalCode, next) {
-        Products.findOne({internalCode: internalCode}, "name sellPrice", function (err, data) {
+        Products.findOne({internalCode: internalCode}, "name minimumTotal sellPrice", function (err, data) {
             if (err) throw err
             
             if (data != null) {
@@ -49,7 +54,7 @@ module.exports = {
     },
     
     findProductInfoPriceByName: function (name, next) {
-        Products.findOne({name: name}, "internalCode sellPrice", function (err, data) {
+        Products.findOne({name: name}, "internalCode minimumTotal sellPrice", function (err, data) {
             if (err) throw err
             
             if (data != null) {
