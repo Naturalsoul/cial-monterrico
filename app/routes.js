@@ -3,6 +3,7 @@
 var Users       = require("./controllers/users.controller")
 var Products    = require("./controllers/products.controller")
 var Sells       = require("./controllers/sells.controller")
+var Offers      = require("./controllers/offers.controller")
 
 // ------------------
 
@@ -167,6 +168,32 @@ module.exports = function (app) {
     app.put("/api/delsell", function (req, res) {
         if (req.session.logged) {
             Sells.remove(req.body.internalCode, req.body.products, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    /* 
+     * --------------------------------------------------------------------------
+     * Offers
+     * --------------------------------------------------------------------------
+     */
+    
+    app.post("/api/findproductinfopricebycode", function (req, res) {
+        if (req.session.logged) {
+            Offers.findProductInfoByCode(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.post("/api/findproductinfopricebyname", function (req, res) {
+        if (req.session.logged) {
+            Offers.findProductInfoByName(req.body.name, function (results) {
                 res.json(results)
             })
         } else {

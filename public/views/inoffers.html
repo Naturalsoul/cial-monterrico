@@ -5,7 +5,7 @@
     <div class="card-body">
         <form ng-submit="insert()">
             <div class="row">
-                <div class="col-sm-12 col-md-3">
+                <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label for="offer-code">
                             Código Interno
@@ -16,7 +16,41 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="offer-percentage">
+                            Porcentaje de Descuento
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="offer-percentage-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
+                            <input type="number" min="0" step="0.01" ng-model="formData.percentage" class="form-control" placeholder="Procentaje de Descuento" aria-label="Procentaje de Descuento" aria-describedby="offer-percentage-addon" id="offer-percentage" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                      <label for="insert-offer">
+                        Registrar Oferta
+                      </label>
+                      <div class="input-group">
+                        <button type="submit" class="btn btn-success" id="insert-offer">Registrar Oferta</button>
+                      </div>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Datalists -->
+            
+            <datalist id="internalCodes">
+                <option ng-repeat="internalCode in productsInternalCodes" ng-value="internalCode"></option>
+            </datalist>
+            
+            <datalist id="names">
+                <option ng-repeat="name in productsNames" ng-value="name"></option>
+            </datalist>
+            
+            <!-- --------- -->
+            
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -32,7 +66,7 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-addon" id="product-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
-                                            <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Codigo Interno del Producto" aria-label="Codigo Interno del Producto" aria-describedby="product-code-addon" id="product-code" required>
+                                            <input type="text" list="internalCodes" ng-model="product.internalCode" class="form-control" placeholder="Codigo Interno del Producto" aria-label="Codigo Interno del Producto" aria-describedby="product-code-addon" id="product-code" required>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +77,7 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-addon" id="product-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
-                                            <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
+                                            <input type="text" list="names" ng-model="product.name" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +88,18 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-addon" id="product-original-price-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
-                                            <input type="text" ng-model="product.internalCode" class="form-control" placeholder="Precio Original del Producto" aria-label="Precio Original del Producto" aria-describedby="product-original-price-addon" id="product-original-price" readonly required>
+                                            <input type="text" ng-model="product.originalPrice" class="form-control" placeholder="Precio Original del Producto" aria-label="Precio Original del Producto" aria-describedby="product-original-price-addon" id="product-original-price" readonly required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <div class="form-group">
+                                        <label for="product-offer-price">
+                                            Precio Oferta del Producto
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-offer-price-addon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="product.offerPrice" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-offer-price-addon" id="product-offer-price" readonly required>
                                         </div>
                                     </div>
                                 </div>
