@@ -13,6 +13,7 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
             stock: 0,
             quantitySold: 1,
             minimumTotal: 0,
+            originalMinimumTotal: 0,
             price: 0,
             originalPrice: 0
         }
@@ -33,6 +34,7 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
                     $scope.product.name = res.name
                     $scope.product.stock = res.stock
                     $scope.product.minimumTotal = res.minimumTotal
+                    $scope.product.originalMinimumTotal = res.minimumTotal
                     $scope.product.price = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
                     $scope.product.originalPrice = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
                 })
@@ -45,6 +47,7 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
                     $scope.product.internalCode = res.internalCode
                     $scope.product.stock = res.stock
                     $scope.product.minimumTotal = res.minimumTotal
+                    $scope.product.originalMinimumTotal = res.minimumTotal
                     $scope.product.price = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
                     $scope.product.originalPrice = (res.offerPrice != 0) ? res.offerPrice : res.sellPrice
                 })
@@ -55,6 +58,8 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
             if ($scope.product.quantitySold >= 1) {
                 $scope.product.price = $scope.product.originalPrice
                 $scope.product.price *= $scope.product.quantitySold
+                $scope.product.minimumTotal = $scope.product.originalMinimumTotal
+                $scope.product.minimumTotal *= $scope.product.quantitySold
             }
         }
         
@@ -87,6 +92,7 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
                     stock: 0,
                     quantitySold: 1,
                     minimumTotal: 0,
+                    originalMinimumTotal: 0,
                     price: 0,
                     originalPrice: 0
                 }
