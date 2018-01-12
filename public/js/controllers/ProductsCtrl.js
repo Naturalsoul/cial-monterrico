@@ -21,7 +21,7 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
         $scope.calculateMoney = function () {
             $scope.formData.iva = Math.round($scope.formData.neto * 0.19)
             $scope.formData.ivaNeto = $scope.formData.iva + $scope.formData.neto
-            $scope.formData.minimumTotal = Math.round($scope.formData.ivaNeto / 0.5093)
+            $scope.formData.minimumTotal = Math.round($scope.formData.ivaNeto / 0.4)
         }
         
         $scope.insertProduct = function () {
