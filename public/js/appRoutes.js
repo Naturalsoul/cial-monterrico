@@ -58,6 +58,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: "SpendingsController"
         })
         
+        .when("/productsreports", {
+            templateUrl: "views/productsreports.html",
+            controller: "ReportsController"
+        })
+        
         .otherwise({
             redirectTo: "/"
         })

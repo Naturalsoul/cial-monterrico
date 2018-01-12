@@ -1,0 +1,11 @@
+<div ng-controller="ReportsController" ng-init="loadProductsReports()">
+    <div class="card">
+        <h4 class="card-header">
+            <i class="fa fa-files-o" aria-hidden="true"></i> RANKING DE PRODUCTOS VENDIDOS
+        </h4>
+        <div class="card-body" id="allTimesProductChart">
+            <canvas id="base" class="chart-horizontal-bar" chart-series="series" chart-data="monthSalesData" chart-labels="monthSalesLabels" chart-options="options" chart-legend="true">
+            </canvas>
+        </div>
+    </div>
+</div>

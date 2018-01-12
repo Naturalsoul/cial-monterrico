@@ -5,6 +5,7 @@ var Products    = require("./controllers/products.controller")
 var Sells       = require("./controllers/sells.controller")
 var Offers      = require("./controllers/offers.controller")
 var Spendings   = require("./controllers/spendings.controller")
+var Reports     = require("./controllers/reports.controller")
 
 // ------------------
 
@@ -261,6 +262,22 @@ module.exports = function (app) {
     app.put("/api/delspending", function (req, res) {
         if (req.session.logged) {
             Spendings.remove(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    /* 
+     * --------------------------------------------------------------------------
+     * Reports
+     * --------------------------------------------------------------------------
+     */
+     
+    app.get("/api/findallproductsinsells", function (req, res) {
+        if (req.session.logged) {
+            Reports.findAllProductsInSells(function (results) {
                 res.json(results)
             })
         } else {

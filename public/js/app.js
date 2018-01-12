@@ -7,12 +7,14 @@ angular.module('cial-monterrico', ['ngRoute',
                                    "SellsCtrl",
                                    "OffersCtrl",
                                    "SpendingsCtrl",
+                                   "ReportsCtrl",
                                    'UserService',
                                    "AuthService",
                                    "ProductsService",
                                    "SellsService",
                                    "OffersService",
-                                   "SpendingsService"
+                                   "SpendingsService",
+                                   "ReportsService"
                                    ])
 
 .run(["$rootScope", "$location", "Auth", function ($rootScope, $location, Auth) {
