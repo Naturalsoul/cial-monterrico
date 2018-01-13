@@ -1,0 +1,46 @@
+<div ng-controller="ReportsController" ng-init="loadSellsReports()">
+    <div class="card">
+        <h4 class="card-header">
+            <i class="fa fa-calendar" aria-hidden="true"></i> VENTAS REALIZADAS ENTRE PERIODOS
+        </h4>
+        <div class="card-body" id="betweenDatesProductChart">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="firstDate">
+                            Desde el ...
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="firstDate-addon"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                            <input type="date" ng-model="formData.firstDateSells" class="form-control" placeholder="Fecha de Inicio" aria-label="Fecha de Inicio" aria-describedby="firstDate-addon" id="firstDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="lastDate">
+                            Hasta el ...
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lastDate-addon"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                            <input type="date" ng-min="formData.lastDateSells" ng-model="formData.lastDateSells" class="form-control" placeholder="Fecha de Término" aria-label="Fecha de Término" aria-describedby="lastDate-addon" id="lastDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="searchBetweenDatesSells">
+                            Buscar entre Fechas
+                        </label>
+                        <div class="input-group">
+                            <button type="button" class="btn btn-primary" id="searchBetweenDatesSells" ng-click="searchBetweenDatesSells()">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <canvas id="base" class="chart-horizontal-bar" chart-series="betweenDatesSellsSeries" chart-data="betweenDatesSellsData" chart-labels="betweenDatesSellsLabels" chart-options="options" chart-legend="true">
+            </canvas>
+        </div>
+    </div>
+</div>

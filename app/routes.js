@@ -285,6 +285,26 @@ module.exports = function (app) {
         }
     })
     
+    app.post("/api/findallproductsinsellsbetweendates", function (req, res) {
+        if (req.session.logged) {
+            Reports.findAllProductsInSellsBetweenDates(req.body.firstDate, req.body.lastDate, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.post("/api/findallsellsbetweendates", function (req, res) {
+        if (req.session.logged) {
+            Reports.findAllSellsBetweenDates(req.body.firstDate, req.body.lastDate, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
     app.get("*", function (req, res) {
         res.sendFile("index.html", {root: __dirname + "/../public/"})
     })
