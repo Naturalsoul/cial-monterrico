@@ -1,0 +1,56 @@
+<div ng-controller="ReportsController" ng-init="loadSummaryReports()">
+    <div class="card">
+        <h4 class="card-header">
+            <i class="fa fa-line-chart" aria-hidden="true"></i> RESUMEN
+        </h4>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="firstDate">
+                            Desde el ...
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="firstDate-addon"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                            <input type="date" ng-model="formData.firstDate" class="form-control" placeholder="Fecha de Inicio" aria-label="Fecha de Inicio" aria-describedby="firstDate-addon" id="firstDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="lastDate">
+                            Hasta el ...
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lastDate-addon"><i class="fa fa-calendar-o" aria-hidden="true"></i></span>
+                            <input type="date" ng-min="formData.firstDate" ng-model="formData.lastDate" class="form-control" placeholder="Fecha de Término" aria-label="Fecha de Término" aria-describedby="lastDate-addon" id="lastDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label for="searchBetweenDatesSummary">
+                            Buscar entre Fechas
+                        </label>
+                        <div class="input-group">
+                            <button type="button" class="btn btn-primary" id="searchBetweenDatesSummary" ng-click="searchBetweenDatesSummary()">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <canvas id="base" class="chart-horizontal-bar" chart-colors="summaryColors" chart-series="betweenDatesSummarySeries" chart-data="betweenDatesSummaryData" chart-options="options" chart-legend="true">
+            </canvas>
+            
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-12">
+                    <p><strong>Ventas Totales:</strong> {{quantities.sells}}</p>
+                    <p><strong>Ingreso por Ventas:</strong> $ {{quantities.sellsTotal}}</p>
+                    <p><strong>Ingresos Extras Totales:</strong> {{quantities.extraIncomes}}</p>
+                    <p><strong>Ingreso por Ingresos Extra:</strong> $ {{quantities.extraIncomesTotal}}</p>
+                    <p><strong>Gastos Totales:</strong> {{quantities.spendings}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

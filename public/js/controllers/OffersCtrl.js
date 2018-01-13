@@ -1,4 +1,4 @@
-angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngConfirm", "$route", "OffersService", function ($scope, $ngConfirm, $route, OffersService) {
+angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngConfirm", "$route", "OffersService", "ExcelService", function ($scope, $ngConfirm, $route, OffersService, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
             internalCode: "",
@@ -102,6 +102,10 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
                 e.offerPrice = e.originalPrice - (e.originalPrice * (e.percentage / 100))
             })
         })
+        
+        $scope.exportToExcel = function () {
+            ExcelService.tableToExcel(new Date(), "offersTable", "Reporte de Ofertas")
+        }
         
         $scope.removeOffer = function (internalCode, internalCodeProduct, originalPrice) {
             $ngConfirm({

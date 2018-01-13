@@ -28,6 +28,16 @@ angular.module("ReportsService", []).factory("ReportsService", ["$http", functio
                     console.log(err)
                     next([])
                 })
+        },
+        
+        getSummaryData: function (firstDate, lastDate, next) {
+            $http.post("/api/getsummarydata", {firstDate: firstDate, lastDate: lastDate})
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
         }
     }
 }])

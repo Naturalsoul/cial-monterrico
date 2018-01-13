@@ -1,4 +1,4 @@
-angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController", ["$scope", "ProductsService", "$routeParams", "$location", "$ngConfirm", "$route", function ($scope, ProductsService, $routeParams, $location, $ngConfirm, $route) {
+angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController", ["$scope", "ProductsService", "$routeParams", "$location", "$ngConfirm", "$route", "$timeout", "ExcelService", function ($scope, ProductsService, $routeParams, $location, $ngConfirm, $route, $timeout, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
             internalCode: "",
@@ -61,6 +61,10 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
                 e.sellPrice = (e.offerPrice != 0 || (typeof e.offerPrice != "undefined" && e.offerPrice != 0)) ? e.offerPrice : e.sellPrice
             })
         })
+        
+        $scope.exportToExcel = function () {
+            ExcelService.tableToExcel(new Date(), "productsTable", "Inventario de Productos")
+        }
         
         $scope.disableProduct = function (internalCode) {
             $ngConfirm({

@@ -9,77 +9,91 @@
             </div>
         </div>
       </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="export-excel">
+            Exportar a Excel
+          </label>
+          <div class="input-group">
+            <button type="button" ng-click="exportToExcel()" class="btn btn-success">
+              Exportar a Excel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     
-    <table id="offersTable" class="table table-responsive table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'internalCode'; sortReverse = !sortReverse" class="text-white">
-              Código Interno
-              <span ng-show="sortType == 'internalCode' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'internalCode' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'internalCodeProduct'; sortReverse = !sortReverse" class="text-white">
-              Código Interno del Producto
-              <span ng-show="sortType == 'internalCodeProduct' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'internalCodeProduct' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'nameProduct'; sortReverse = !sortReverse" class="text-white">
-              Nombre del Producto
-              <span ng-show="sortType == 'nameProduct' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'nameProduct' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'percentage'; sortReverse = !sortReverse" class="text-white">
-              Porcentaje de Descuento
-              <span ng-show="sortType == 'percentage' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'percentage' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'offerPrice'; sortReverse = !sortReverse" class="text-white">
-              Precio con Descuento
-              <span ng-show="sortType == 'offerPrice' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'offerPrice' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'originalPrice'; sortReverse = !sortReverse" class="text-white">
-              Precio sin Descuento
-              <span ng-show="sortType == 'originalPrice' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'originalPrice' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'creationDate'; sortReverse = !sortReverse" class="text-white">
-              Fecha de Ingreso de la Oferta
-              <span ng-show="sortType == 'creationDate' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'creationDate' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            Acciones
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="offer in offers | filter: searchKeyword | orderBy: sortType : sortReverse">
-            <th scope="row" class="align-middle text-center">{{offer.internalCode}}</th>
-            <td class="align-middle text-center font-14">{{offer.internalCodeProduct}}</td>
-            <td class="align-middle text-center font-14">{{offer.nameProduct}}</td>
-            <td class="align-middle text-center font-14">{{offer.percentage}} %</td>
-            <td class="align-middle text-center font-14">$ {{offer.offerPrice}}</td>
-            <td class="align-middle text-center font-14">$ {{offer.originalPrice}}</td>
-            <td class="align-middle text-center font-14">{{offer.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
-            <td class="align-middle text-center">
-                <a ng-href="#" ng-click="removeOffer(offer.internalCode, offer.internalCodeProduct, offer.originalPrice)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-            </td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="offersTable">
+      <table id="offersTable" class="table table-responsive table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'internalCode'; sortReverse = !sortReverse" class="text-white">
+                Código Interno
+                <span ng-show="sortType == 'internalCode' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'internalCode' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'internalCodeProduct'; sortReverse = !sortReverse" class="text-white">
+                Código Interno del Producto
+                <span ng-show="sortType == 'internalCodeProduct' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'internalCodeProduct' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'nameProduct'; sortReverse = !sortReverse" class="text-white">
+                Nombre del Producto
+                <span ng-show="sortType == 'nameProduct' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'nameProduct' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'percentage'; sortReverse = !sortReverse" class="text-white">
+                Porcentaje de Descuento
+                <span ng-show="sortType == 'percentage' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'percentage' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'offerPrice'; sortReverse = !sortReverse" class="text-white">
+                Precio con Descuento
+                <span ng-show="sortType == 'offerPrice' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'offerPrice' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'originalPrice'; sortReverse = !sortReverse" class="text-white">
+                Precio sin Descuento
+                <span ng-show="sortType == 'originalPrice' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'originalPrice' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'creationDate'; sortReverse = !sortReverse" class="text-white">
+                Fecha de Ingreso de la Oferta
+                <span ng-show="sortType == 'creationDate' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'creationDate' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="offer in offers | filter: searchKeyword | orderBy: sortType : sortReverse">
+              <th scope="row" class="align-middle text-center">{{offer.internalCode}}</th>
+              <td class="align-middle text-center font-14">{{offer.internalCodeProduct}}</td>
+              <td class="align-middle text-center font-14">{{offer.nameProduct}}</td>
+              <td class="align-middle text-center font-14">{{offer.percentage}} %</td>
+              <td class="align-middle text-center font-14">$ {{offer.offerPrice}}</td>
+              <td class="align-middle text-center font-14">$ {{offer.originalPrice}}</td>
+              <td class="align-middle text-center font-14">{{offer.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
+              <td class="align-middle text-center">
+                  <a ng-href="#" ng-click="removeOffer(offer.internalCode, offer.internalCodeProduct, offer.originalPrice)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

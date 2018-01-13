@@ -9,64 +9,78 @@
             </div>
         </div>
       </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="export-excel">
+            Exportar a Excel
+          </label>
+          <div class="input-group">
+            <button type="button" ng-click="exportToExcel()" class="btn btn-success">
+              Exportar a Excel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     
-    <table id="productsTable" class="table table-responsive table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'internalCode'; sortReverse = !sortReverse" class="text-white">
-              Código Interno
-              <span ng-show="sortType == 'internalCode' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'internalCode' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="text-white">
-              Título General
-              <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'details'; sortReverse = !sortReverse" class="text-white">
-              Detalles
-              <span ng-show="sortType == 'details' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'details' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse" class="text-white">
-              Fecha
-              <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            <a href="#" ng-click="sortType = 'totalSpending'; sortReverse = !sortReverse" class="text-white">
-              Gasto Total
-              <span ng-show="sortType == 'totalSpending' && !sortReverse" class="fa fa-caret-down"></span>
-              <span ng-show="sortType == 'totalSpending' && sortReverse" class="fa fa-caret-up"></span>
-            </a>
-          </th>
-          <th scope="col" class="align-middle text-center">
-            Acciones
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="spending in spendings | filter: searchKeyword | orderBy: sortType : sortReverse">
-            <th scope="row" class="align-middle text-center">{{spending.internalCode}}</th>
-            <td class="align-middle text-center font-14">{{spending.title}}</td>
-            <td class="align-middle text-center font-14"><button class="btn btn-primary" ng-click="showDetails(spending.details)">Ver Detalles</button></td>
-            <td class="align-middle text-center font-14">{{spending.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
-            <td class="align-middle text-center font-14">$ {{spending.totalSpending}}</td>
-            <td class="align-middle text-center">
-                <a ng-href="#" ng-click="removeSpending(spending.internalCode)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-            </td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="spendingsTable">
+      <table class="table table-responsive table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'internalCode'; sortReverse = !sortReverse" class="text-white">
+                Código Interno
+                <span ng-show="sortType == 'internalCode' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'internalCode' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="text-white">
+                Título General
+                <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'details'; sortReverse = !sortReverse" class="text-white">
+                Detalles
+                <span ng-show="sortType == 'details' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'details' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse" class="text-white">
+                Fecha
+                <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              <a href="#" ng-click="sortType = 'totalSpending'; sortReverse = !sortReverse" class="text-white">
+                Gasto Total
+                <span ng-show="sortType == 'totalSpending' && !sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="sortType == 'totalSpending' && sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th scope="col" class="align-middle text-center">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="spending in spendings | filter: searchKeyword | orderBy: sortType : sortReverse">
+              <th scope="row" class="align-middle text-center">{{spending.internalCode}}</th>
+              <td class="align-middle text-center font-14">{{spending.title}}</td>
+              <td class="align-middle text-center font-14"><button class="btn btn-primary" ng-click="showDetails(spending.details)">Ver Detalles</button></td>
+              <td class="align-middle text-center font-14">{{spending.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
+              <td class="align-middle text-center font-14">$ {{spending.totalSpending}}</td>
+              <td class="align-middle text-center">
+                  <a ng-href="#" ng-click="removeSpending(spending.internalCode)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     
     <div class="modal fade" tabindex="-1" role="dialog" id="detailsModal">
       <div class="modal-dialog" role="document">

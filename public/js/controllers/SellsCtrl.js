@@ -1,4 +1,4 @@
-angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$scope", "SellsService", "$ngConfirm", "$route", function ($scope, SellsService, $ngConfirm, $route) {
+angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$scope", "SellsService", "$ngConfirm", "$route", "ExcelService", function ($scope, SellsService, $ngConfirm, $route, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
             internalCode: "",
@@ -143,6 +143,10 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
             $scope.products = products
             
             $("#productsModal").modal()
+        }
+        
+        $scope.exportToExcel = function () {
+            ExcelService.tableToExcel(new Date(), "sellsTable", "Reporte de Ventas")
         }
         
         $scope.removeSell = function (internalCode, products) {

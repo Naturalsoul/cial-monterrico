@@ -1,4 +1,4 @@
-angular.module("ExtraIncomesCtrl", ["cp.ngConfirm"]).controller("ExtraIncomesController", ["$scope", "$ngConfirm", "$route", "ExtraIncomesService", function ($scope, $ngConfirm, $route, ExtraIncomesService) {
+angular.module("ExtraIncomesCtrl", ["cp.ngConfirm"]).controller("ExtraIncomesController", ["$scope", "$ngConfirm", "$route", "ExtraIncomesService", "ExcelService", function ($scope, $ngConfirm, $route, ExtraIncomesService, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
             internalCode: "",
@@ -76,6 +76,10 @@ angular.module("ExtraIncomesCtrl", ["cp.ngConfirm"]).controller("ExtraIncomesCon
             $scope.details = details
             
             $("#detailsModal").modal()
+        }
+        
+        $scope.exportToExcel = function () {
+            ExcelService.tableToExcel(new Date(), "extraIncomesTable", "Reporte de Ingresos Extras")
         }
         
         $scope.removeExtraIncome = function (internalCode) {

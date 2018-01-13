@@ -342,6 +342,16 @@ module.exports = function (app) {
         }
     })
     
+    app.post("/api/getsummarydata", function (req, res) {
+        if (req.session.logged) {
+            Reports.getSummaryData(req.body.firstDate, req.body.lastDate, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
     app.get("*", function (req, res) {
         res.sendFile("index.html", {root: __dirname + "/../public/"})
     })
