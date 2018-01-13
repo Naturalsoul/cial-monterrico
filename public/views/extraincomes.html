@@ -1,0 +1,110 @@
+<div ng-controller="ExtraIncomesController" ng-init="loadTableData()">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+            <label for="search">Buscar un Ingreso Extra</label>
+            <div class="input-group">
+                <span class="input-group-addon" id="search-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Buscar un Ingreso Extra" aria-label="Buscar un Ingreso Extra" aria-describedby="search-addon" id="search">
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <table id="productsTable" class="table table-responsive table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="align-middle text-center">
+            <a href="#" ng-click="sortType = 'internalCode'; sortReverse = !sortReverse" class="text-white">
+              Código Interno
+              <span ng-show="sortType == 'internalCode' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'internalCode' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th scope="col" class="align-middle text-center">
+            <a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse" class="text-white">
+              Título General
+              <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th scope="col" class="align-middle text-center">
+            <a href="#" ng-click="sortType = 'details'; sortReverse = !sortReverse" class="text-white">
+              Detalles
+              <span ng-show="sortType == 'details' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'details' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th scope="col" class="align-middle text-center">
+            <a href="#" ng-click="sortType = 'date'; sortReverse = !sortReverse" class="text-white">
+              Fecha
+              <span ng-show="sortType == 'date' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'date' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th scope="col" class="align-middle text-center">
+            <a href="#" ng-click="sortType = 'totalExtraIncome'; sortReverse = !sortReverse" class="text-white">
+              Ingreso Extra Total
+              <span ng-show="sortType == 'totalExtraIncome' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'totalExtraIncome' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th scope="col" class="align-middle text-center">
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="extraIncome in extraIncomes | filter: searchKeyword | orderBy: sortType : sortReverse">
+            <th scope="row" class="align-middle text-center">{{extraIncome.internalCode}}</th>
+            <td class="align-middle text-center font-14">{{extraIncome.title}}</td>
+            <td class="align-middle text-center font-14"><button class="btn btn-primary" ng-click="showDetails(extraIncome.details)">Ver Detalles</button></td>
+            <td class="align-middle text-center font-14">{{extraIncome.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
+            <td class="align-middle text-center font-14">$ {{extraIncome.totalExtraIncome}}</td>
+            <td class="align-middle text-center">
+                <a ng-href="#" ng-click="removeExtraIncome(extraIncome.internalCode)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="modal fade" tabindex="-1" role="dialog" id="detailsModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Detalles</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-responsive table-bordered">
+                <thead class="thead-dark">
+                    <tr scope="row">
+                        <th scope="col" class="align-middle text-center">
+                            Nombre del Detalle
+                        </th>
+                        <th scope="col" class="align-middle text-center">
+                            Cantidad de Ingreso Extra
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" ng-repeat="d in details">
+                        <td scope="col" class="align-middle text-center">
+                            {{d.name}}
+                        </td>
+                        <td scope="col" class="align-middle text-center">
+                            $ {{d.price}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

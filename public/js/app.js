@@ -7,6 +7,7 @@ angular.module('cial-monterrico', ['ngRoute',
                                    "SellsCtrl",
                                    "OffersCtrl",
                                    "SpendingsCtrl",
+                                   "ExtraIncomesCtrl",
                                    "ReportsCtrl",
                                    'UserService',
                                    "AuthService",
@@ -14,6 +15,7 @@ angular.module('cial-monterrico', ['ngRoute',
                                    "SellsService",
                                    "OffersService",
                                    "SpendingsService",
+                                   "ExtraIncomesService",
                                    "ReportsService"
                                    ])
 

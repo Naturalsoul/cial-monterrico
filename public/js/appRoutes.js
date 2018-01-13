@@ -58,6 +58,16 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: "SpendingsController"
         })
         
+        .when("/inextraincomes", {
+            templateUrl: "views/inextraincomes.html",
+            controller: "ExtraIncomesController"
+        })
+        
+        .when("/extraincomes", {
+            templateUrl: "views/extraincomes.html",
+            controller: "ExtraIncomesController"
+        })
+        
         .when("/productsreports", {
             templateUrl: "views/productsreports.html",
             controller: "ReportsController"

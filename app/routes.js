@@ -1,11 +1,12 @@
 // ------------------ Controllers
 
-var Users       = require("./controllers/users.controller")
-var Products    = require("./controllers/products.controller")
-var Sells       = require("./controllers/sells.controller")
-var Offers      = require("./controllers/offers.controller")
-var Spendings   = require("./controllers/spendings.controller")
-var Reports     = require("./controllers/reports.controller")
+var Users           = require("./controllers/users.controller")
+var Products        = require("./controllers/products.controller")
+var Sells           = require("./controllers/sells.controller")
+var Offers          = require("./controllers/offers.controller")
+var Spendings       = require("./controllers/spendings.controller")
+var ExtraIncomes    = require("./controllers/extraincomes.controller")
+var Reports         = require("./controllers/reports.controller")
 
 // ------------------
 
@@ -262,6 +263,42 @@ module.exports = function (app) {
     app.put("/api/delspending", function (req, res) {
         if (req.session.logged) {
             Spendings.remove(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    /* 
+     * --------------------------------------------------------------------------
+     * Extra Incomes
+     * --------------------------------------------------------------------------
+     */
+     
+    app.post("/api/inextraincome", function (req, res) {
+        if (req.session.logged) {
+            ExtraIncomes.insert(req.body, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.get("/api/getextraincomes", function (req, res) {
+        if (req.session.logged) {
+            ExtraIncomes.find(function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.put("/api/delextraincome", function (req, res) {
+        if (req.session.logged) {
+            ExtraIncomes.remove(req.body.internalCode, function (results) {
                 res.json(results)
             })
         } else {
