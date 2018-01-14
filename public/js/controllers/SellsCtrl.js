@@ -55,11 +55,14 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
         }
         
         $scope.multiplySellPrice = function () {
-            if ($scope.product.quantitySold >= 1) {
+            if ($scope.product.quantitySold > 0) {
                 $scope.product.price = $scope.product.originalPrice
                 $scope.product.price *= $scope.product.quantitySold
-                $scope.product.minimumTotal = $scope.product.originalMinimumTotal
-                $scope.product.minimumTotal *= $scope.product.quantitySold
+                
+                if ($scope.product.quantitySold >= 1) {
+                    $scope.product.minimumTotal = $scope.product.originalMinimumTotal
+                    $scope.product.minimumTotal *= $scope.product.quantitySold
+                }
             }
         }
         
@@ -67,8 +70,9 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
             let ok = $scope.productsInternalCode.indexOf($scope.product.internalCode) != -1 &&
                      $scope.productsName.indexOf($scope.product.name) != -1 &&
                      $scope.product.stock >= 1 &&
-                     $scope.product.quantitySold >= 1 &&
-                     $scope.product.price >= 1
+                     $scope.product.quantitySold > 0 &&
+                     $scope.product.price >= 1 &&
+                     $scope.product.price >= $scope.product.minimumTotal
                      
             for (let i = 0; i < $scope.formData.products.length; i++) {
                 if ($scope.formData.products[i].internalCode == $scope.product.internalCode) {

@@ -128,6 +128,14 @@ angular.module("ReportsCtrl", ["cp.ngConfirm", 'chart.js']).controller("ReportsC
         $scope.searchBetweenDatesSummary = function () {
             if ($scope.formData.firstDate != "" && $scope.formData.lastDate) {
                 ReportsService.getSummaryData($scope.formData.firstDate, $scope.formData.lastDate, function (res) {
+                    $scope.quantities = {
+                        sells: 0,
+                        sellsTotal: 0,
+                        extraIncomes: 0,
+                        extraIncomesTotal: 0,
+                        spendings: 0
+                    }
+                    
                     $scope.betweenDatesSummaryData = [[], []]
                     $scope.betweenDatesSummarySeries = ["Ingresos Totales", "Gastos Totales"]
                     let incomes = 0
