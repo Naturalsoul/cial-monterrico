@@ -8,6 +8,14 @@ angular.module("AlertsCtrl", []).controller("AlertsController", ["$scope", "Aler
         $scope.incomes = 0
         $scope.spendings = 0
         
+        if (res.length < 1) {
+            res = {
+                extraIncomes: [],
+                sells: [],
+                spendings: []
+            }
+        }
+        
         res.extraIncomes.forEach(function (e) {
             $scope.incomes += e.totalExtraIncome
         })

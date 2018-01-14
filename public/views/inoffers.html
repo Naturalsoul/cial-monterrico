@@ -42,11 +42,11 @@
             <!-- Datalists -->
             
             <datalist id="internalCodes">
-                <option ng-repeat="internalCode in productsInternalCodes" ng-value="internalCode"></option>
+                <option ng-repeat="internalCode in productsInternalCodes track by $index" ng-value="internalCode"></option>
             </datalist>
             
             <datalist id="names">
-                <option ng-repeat="name in productsNames" ng-value="name"></option>
+                <option ng-repeat="name in productsNames track by $index" ng-value="name"></option>
             </datalist>
             
             <!-- --------- -->

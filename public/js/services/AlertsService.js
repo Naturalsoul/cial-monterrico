@@ -6,7 +6,11 @@ angular.module("AlertsService", []).factory("AlertsService", ["$http", function 
                     next(data.data)
                 }, function (err) {
                     console.log(err)
-                    next([])
+                    next({
+                        extraIncomes: [],
+                        sells: [],
+                        spendings: []
+                    })
                 })
         },
         

@@ -1,7 +1,7 @@
 <div ng-controller="ReportsController" ng-init="loadProductsReports()">
     <div class="card">
         <h4 class="card-header">
-            <i class="fa fa-files-o" aria-hidden="true"></i> VENTAS TOTALES POR PRODUCTO
+            <i class="fa fa-files-o" aria-hidden="true"></i> TOTALES DE CADA PRODUCTO VENDIDO
         </h4>
         <div class="card-body" id="allTimesProductChart">
             <canvas id="base" class="chart-horizontal-bar" chart-series="allTimesSeries" chart-data="allTimesData" chart-labels="allTimesLabels" chart-options="options" chart-legend="true">
@@ -11,7 +11,7 @@
 
     <div class="card" style="margin-top:15px;">
         <h4 class="card-header">
-            <i class="fa fa-calendar" aria-hidden="true"></i> VENTAS TOTALES POR PRODUCTO ENTRE FECHAS
+            <i class="fa fa-calendar" aria-hidden="true"></i> TOTALES DE CADA PRODUCTO VENDIDO ENTRE PERIODOS
         </h4>
         <div class="card-body" id="betweenDatesProductChart">
             <div class="row">

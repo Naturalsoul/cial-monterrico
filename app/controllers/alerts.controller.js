@@ -8,7 +8,7 @@ module.exports = {
             let lowStockProducts = []
             
             data.forEach(function (e) {
-                if (e.minimumStock >= e.stock) {
+                if (e.minimumStock >= e.stock || e.minimumStock == e.stock) {
                     lowStockProducts.push({
                         internalCode: e.internalCode,
                         stock: e.stock

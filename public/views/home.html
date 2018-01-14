@@ -9,44 +9,6 @@
                 <div class="col-sm-12 offset-md-4 col-md-6">
                     <div class="card">
                         <h4 class="card-header text-center">
-                            PRODUCTOS BAJO STOCK
-                        </h4>
-                        <div class="card-body">
-                            <h1 class="text-center">{{lowStockProductsQuantity}}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 offset-md-4 col-md-6" style="margin-top:15px;">
-                    <table class="table table-responsive table-bordered">
-                        <thead class="thead-dark">
-                            <tr scope="row">
-                                <th scope="col" class="align-middle text-center">
-                                    Código Interno del Producto
-                                </th>
-                                <th scope="col" class="align-middle text-center">
-                                    Stock Actual
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr scope="row" ng-repeat="p in lowStockProducts">
-                                <td scope="col" class="align-middle text-center">
-                                    {{p.internalCode}}
-                                </td>
-                                <td scope="col" class="align-middle text-center">
-                                    {{p.stock}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-sm-12 offset-md-1 col-md-6">
-                    <div class="card">
-                        <h4 class="card-header text-center">
                             SITUACIÓN ECONÓMICA ACTUAL (MES)
                         </h4>
                         <div class="card-body text-center">
@@ -55,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 offset-md-1 col-md-6" style="margin-top:15px;">
+                <div class="col-sm-12 offset-md-4 col-md-6" style="margin-top:15px;">
                     <table class="table table-responsive table-bordered">
                         <thead class="thead-dark">
                             <tr scope="row">
@@ -74,6 +36,44 @@
                                 </td>
                                 <td scope="col" class="align-middle text-center text-danger">
                                     $ {{spendings}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-12 offset-md-1 col-md-6">
+                    <div class="card">
+                        <h4 class="card-header text-center">
+                            PRODUCTOS BAJO STOCK
+                        </h4>
+                        <div class="card-body">
+                            <h1 class="text-center">{{lowStockProductsQuantity}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 offset-md-1 col-md-6" style="margin-top:15px;">
+                    <table class="table table-responsive table-bordered">
+                        <thead class="thead-dark">
+                            <tr scope="row">
+                                <th scope="col" class="align-middle text-center">
+                                    Código Interno del Producto
+                                </th>
+                                <th scope="col" class="align-middle text-center">
+                                    Stock Actual
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr scope="row" ng-repeat="p in lowStockProducts">
+                                <td scope="col" class="align-middle text-center">
+                                    {{p.internalCode}}
+                                </td>
+                                <td scope="col" class="align-middle text-center">
+                                    {{p.stock}}
                                 </td>
                             </tr>
                         </tbody>
