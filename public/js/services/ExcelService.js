@@ -33,10 +33,7 @@ angular.module("ExcelService", []).factory("ExcelService", [function(){
                 link.click();
             */
             
-            var blob = new Blob([document.getElementById(id).innerHTML], {
-                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-                });
-                saveAs(blob, name + " " + d + ".xls");
+            $('#' + id).tableExport({type:'excel',escape:'false'});
         }
     }
 }])
