@@ -7,6 +7,7 @@ var Offers          = require("./controllers/offers.controller")
 var Spendings       = require("./controllers/spendings.controller")
 var ExtraIncomes    = require("./controllers/extraincomes.controller")
 var Reports         = require("./controllers/reports.controller")
+var Alerts          = require("./controllers/alerts.controller")
 
 // ------------------
 
@@ -345,6 +346,22 @@ module.exports = function (app) {
     app.post("/api/getsummarydata", function (req, res) {
         if (req.session.logged) {
             Reports.getSummaryData(req.body.firstDate, req.body.lastDate, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    /* 
+     * --------------------------------------------------------------------------
+     * Alerts
+     * --------------------------------------------------------------------------
+     */
+     
+    app.get("/api/findlowstockproducts", function (req, res) {
+        if (req.session.logged) {
+            Alerts.findStockInfo(function (results) {
                 res.json(results)
             })
         } else {
