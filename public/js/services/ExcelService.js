@@ -9,7 +9,7 @@ angular.module("ExcelService", []).factory("ExcelService", [function(){
             d += "-"
             d += date.getFullYear()
             
-            
+            /*
             var sheetName = name + " " + d;
             var fileName = sheetName + ".xls";
             var fileRaw = document.getElementById(id).innerHTML;
@@ -31,6 +31,12 @@ angular.module("ExcelService", []).factory("ExcelService", [function(){
                 link.download = fileName;
                 link.href = uri + base64(format(template, ctx));
                 link.click();
+            */
+            
+            var blob = new Blob([document.getElementById(id).innerHTML], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                });
+                saveAs(blob, name + " " + d + ".xls");
         }
     }
 }])

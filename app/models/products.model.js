@@ -11,8 +11,8 @@ module.exports = db.model("Products", {
     minimumTotal: {type: Number, min: 1},
     sellPrice: {type: Number, min: 1},
     offerPrice: {type: Number, default: 0},
-    stock: {type: Number, min: 1},
-    minimumStock: {type: Number, min: 1},
+    stock: {type: Number, min: 1, default: 0},
+    minimumStock: {type: Number, min: 1, default: 0},
     state: {type: Boolean, default: true},
     creationDate: {type: Date, default: Date.now}
 })
