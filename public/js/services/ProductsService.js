@@ -66,6 +66,16 @@ angular.module('ProductsService', []).factory('ProductsService', ['$http', "$loc
                     console.log(err)
                     next(false)
                 })
+        },
+        
+        remove: function (internalCode, next) {
+            $http.put("/api/delproduct", {internalCode: internalCode})
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
         }
     }
 }])

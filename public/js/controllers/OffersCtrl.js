@@ -1,7 +1,6 @@
 angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngConfirm", "$route", "OffersService", "ExcelService", function ($scope, $ngConfirm, $route, OffersService, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
-            internalCode: "",
             internalCodeProduct: "",
             nameProduct: "",
             percentage: 0,
@@ -68,7 +67,6 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
                         $ngConfirm("Oferta registrada con éxito!", "Exito!")
                         
                         $scope.formData = {
-                            internalCode: "",
                             internalCodeProduct: "",
                             nameProduct: "",
                             percentage: 0,

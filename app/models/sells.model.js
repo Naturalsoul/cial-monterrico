@@ -1,15 +1,21 @@
 var db = require("./../../config/db")
+let Schema = require("mongoose").Schema
+let autoIncrement = require("mongoose-auto-increment")
 
-Date.prototype.addHours = function(h) {    
-   this.setTime(this.getTime() + (h*60*60*1000)); 
-   return this;   
-}
+autoIncrement.initialize(db)
 
-let date = new Date()
-
-module.exports = db.model("Sells", {
-    internalCode: String,
-    creationDate: {type: Date, default: date.addHours(-3)},
+let SellsSchema = new Schema({
+    internalCode: Number,
+    creationDate: {type: Date, default: Date.now},
     products: {type: Array, default: []},
     totalPrice: Number
 })
+
+SellsSchema.plugin(autoIncrement.plugin, {
+    model: "Sells",
+    field: "internalCode",
+    startAt: 50000,
+    incrementBy: 1
+})
+
+module.exports = db.model("Sells", SellsSchema)

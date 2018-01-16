@@ -113,6 +113,16 @@ module.exports = function (app) {
         }
     })
     
+    app.put("/api/delproduct", function (req, res) {
+        if (req.session.logged) {
+            Products.remove(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
     /* 
      * --------------------------------------------------------------------------
      * Sells

@@ -1,7 +1,6 @@
 angular.module("ExtraIncomesCtrl", ["cp.ngConfirm"]).controller("ExtraIncomesController", ["$scope", "$ngConfirm", "$route", "ExtraIncomesService", "ExcelService", function ($scope, $ngConfirm, $route, ExtraIncomesService, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
-            internalCode: "",
             title: "",
             totalExtraIncome: 0,
             details: [],
@@ -49,7 +48,6 @@ angular.module("ExtraIncomesCtrl", ["cp.ngConfirm"]).controller("ExtraIncomesCon
                         $ngConfirm("Ingreso Extra Registrado!", "Éxito!")
                         
                         $scope.formData = {
-                            internalCode: "",
                             title: "",
                             totalExtraIncome: 0,
                             details: [],

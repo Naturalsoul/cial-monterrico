@@ -1,36 +1,17 @@
 let ExtraIncomes = require("./../models/extraincomes.model")
 
 module.exports = {
-    exists: function (internalCode, next) {
-        ExtraIncomes.count({internalCode: internalCode}, function (err, count) {
-            if (err) throw err
-            
-            if (count > 0) {
-                next(true)
-            } else {
-                next(false)
-            }
-        })
-    },
-    
     insert: function (extraIncome, next) {
-        this.exists(extraIncome.internalCode, function (res) {
-            if (res) {
-                next({registered: false})
-            } else {
-                let newExtraIncome = new ExtraIncomes({
-                    internalCode: extraIncome.internalCode,
-                    title: extraIncome.title,
-                    totalExtraIncome: extraIncome.totalExtraIncome,
-                    details: extraIncome.details,
-                    creationDate: extraIncome.creationDate
-                })
-                
-                newExtraIncome.save()
-                
-                next({registered: true})
-            }
+        let newExtraIncome = new ExtraIncomes({
+            title: extraIncome.title,
+            totalExtraIncome: extraIncome.totalExtraIncome,
+            details: extraIncome.details,
+            creationDate: extraIncome.creationDate
         })
+        
+        newExtraIncome.save()
+        
+        next({registered: true})
     },
     
     find: function (next) {

@@ -1,7 +1,6 @@
 angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$scope", "SellsService", "$ngConfirm", "$route", "ExcelService", function ($scope, SellsService, $ngConfirm, $route, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
-            internalCode: "",
             products: [],
             totalPrice: 0,
             creationDate: Date.now()
@@ -122,7 +121,6 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
                     if (res.registered) {
                         $ngConfirm("Venta Registrada!", "Exito!")
                         $scope.formData = {
-                            internalCode: "",
                             products: [],
                             totalPrice: 0
                         }

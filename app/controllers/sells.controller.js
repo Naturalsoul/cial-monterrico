@@ -2,43 +2,24 @@ let Sells = require("./../models/sells.model")
 let Products = require("./../models/products.model")
 
 module.exports = {
-    exists: function (internalCode, next) {
-        Sells.count({internalCode: internalCode}, function (err, count) {
-            if (err) throw err
-            
-            if (count > 0) {
-                next(true)
-            } else {
-                next(false)
-            }
-        })
-    },
-    
     insert: function (sell, next) {
-        this.exists(sell.internalCode, function (res) {
-            if (res) {
-                next({registered: false})
-            } else {
-                let newSell = new Sells({
-                    internalCode: sell.internalCode,
-                    products: sell.products,
-                    totalPrice: sell.totalPrice,
-                    creationDate: sell.creationDate
-                })
-                
-                newSell.save()
-                
-                sell.products.forEach(function (e) {
-                    Products.update({internalCode: e.internalCode},
-                                    {$inc: {stock: (e.quantitySold * -1)}},
-                                    function (err, data) {
-                                        if (err) throw err
-                                    })
-                })
-                
-                next({registered: true})
-            }
+        let newSell = new Sells({
+            products: sell.products,
+            totalPrice: sell.totalPrice,
+            creationDate: sell.creationDate
         })
+        
+        newSell.save()
+        
+        sell.products.forEach(function (e) {
+            Products.update({internalCode: e.internalCode},
+                            {$inc: {stock: (e.quantitySold * -1)}},
+                            function (err, data) {
+                                if (err) throw err
+                            })
+        })
+        
+        next({registered: true})
     },
     
     findInternalCodeAndName: function (next) {

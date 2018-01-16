@@ -124,7 +124,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="product in products | filter: searchKeyword | orderBy: sortType : sortReverse">
+        <tr ng-repeat="product in products | filter: searchKeyword | orderBy: sortType : sortReverse track by product.internalCode">
             <th scope="row" class="align-middle text-center">{{product.internalCode}}</th>
             <td class="align-middle text-center font-14">{{product.providerCode}}</td>
             <td class="align-middle text-center font-14">{{product.name}}</td>
@@ -142,8 +142,9 @@
                 <span ng-if="product.state == false" class="badge badge-danger">Inactivo</span>
             </td>
             <td class="align-middle text-center">
-                <a ng-href="/editproducts/{{product.internalCode}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                <a href="" ng-click="disableProduct(product.internalCode)" ng-if="product.state == true"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                <a ng-href="/editproducts/{{product.internalCode}}"><i class="fa fa-pencil-square-o text-primary" aria-hidden="true"></i></a>
+                <a href="" ng-click="disableProduct(product.internalCode)" ng-if="product.state == true"><i class="fa fa-minus-circle text-warning" aria-hidden="true"></i></a>
+                <a href="" ng-click="removeProduct(product.internalCode)"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></a>
             </td>
         </tr>
       </tbody>

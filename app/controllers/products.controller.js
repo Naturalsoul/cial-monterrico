@@ -105,5 +105,17 @@ module.exports = {
             
             next({disabled: true})
         })
+    },
+    
+    remove: function (internalCode, next) {
+        Products.remove({internalCode: internalCode}, function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next({removed: true})
+            } else {
+                next({removed: false})
+            }
+        })
     }
 }
