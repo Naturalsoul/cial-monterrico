@@ -1,9 +1,9 @@
 angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController", ["$scope", "ProductsService", "$routeParams", "$location", "$ngConfirm", "$route", "$timeout", "ExcelService", function ($scope, ProductsService, $routeParams, $location, $ngConfirm, $route, $timeout, ExcelService) {
     $scope.loadInsertData = function () {
         $scope.formData = {
-            internalCode: "",
-            providerCode: "",
             name: "",
+            category: "",
+            providerCode: "",
             provider: "",
             stock: 0,
             minimumStock: 0,
@@ -16,6 +16,10 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
         
         ProductsService.findProviders(function (res) {
             $scope.providers = res
+        })
+        
+        ProductsService.findCategories(function (res) {
+            $scope.categories = res
         })
         
         $scope.calculateMoney = function () {
@@ -31,9 +35,9 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
                     $("#alerts").html("<div class='alert alert-success' role='alert'>El Producto ha sido registrado con éxito.</div>")
                     
                     $scope.formData = {
-                        internalCode: "",
-                        providerCode: "",
                         name: "",
+                        category: "",
+                        providerCode: "",
                         provider: "",
                         stock: 0,
                         minimumStock: 0,
@@ -54,13 +58,40 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
     }
     
     $scope.loadTableData = function () {
-        ProductsService.find(function (res) {
-            $scope.products = res
+        ProductsService.findCategories(function (res) {
             
-            $scope.products.forEach(function (e) {
-                e.sellPrice = (e.offerPrice != 0 || (typeof e.offerPrice != "undefined" && e.offerPrice != 0)) ? e.offerPrice : e.sellPrice
-            })
+            res.push("TODOS")
+            $scope.categories = res
+            
         })
+        
+        $scope.categorySelected = ""
+        
+        $scope.searchData = function () {
+            if ($scope.categorySelected != "" && $scope.categorySelected != "TODOS") {
+                
+                ProductsService.findByCategory($scope.categorySelected, function (res) {
+                    $scope.products = res
+                    
+                    $scope.products.forEach(function (e) {
+                        e.sellPrice = (e.offerPrice != 0 || (typeof e.offerPrice != "undefined" && e.offerPrice != 0)) ? e.offerPrice : e.sellPrice
+                    })
+                })
+                
+            } else if ($scope.categorySelected == "TODOS") {
+                
+                ProductsService.find(function (res) {
+                    $scope.products = res
+                    
+                    $scope.products.forEach(function (e) {
+                        e.sellPrice = (e.offerPrice != 0 || (typeof e.offerPrice != "undefined" && e.offerPrice != 0)) ? e.offerPrice : e.sellPrice
+                    })
+                })
+                
+            } else {
+                $ngConfirm("Debe seleccionar una Categoría", "Que mal :(")
+            }
+        }
         
         $scope.exportToExcel = function () {
             ExcelService.tableToExcel(new Date(), "productsTable", "Inventario de Productos")
@@ -137,6 +168,7 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
                 internalCode: res.internalCode,
                 providerCode: res.providerCode,
                 name: res.name,
+                category: res.category,
                 provider: res.provider,
                 stock: res.stock,
                 minimumStock: res.minimumStock,

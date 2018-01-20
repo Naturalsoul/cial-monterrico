@@ -28,7 +28,7 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
         })
         
         $scope.findProductInfoByCode = function () {
-            if ($scope.productsInternalCode.indexOf($scope.product.internalCode) != -1) {
+            if ($scope.productsInternalCode.indexOf(parseInt($scope.product.internalCode)) != -1) {
                 SellsService.findProductInfoByCode($scope.product.internalCode, function (res) {
                     $scope.product.name = res.name
                     $scope.product.stock = res.stock

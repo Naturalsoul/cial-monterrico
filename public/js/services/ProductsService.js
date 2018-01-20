@@ -28,6 +28,27 @@ angular.module('ProductsService', []).factory('ProductsService', ['$http', "$loc
                 })
         },
         
+        findCategories: function (next) {
+            $http.get("/api/getcategories")
+                .then(function (data) {
+                    let arr = []
+                    
+                    data.data.forEach(function (e) {
+                        if (arr.indexOf(e.category) == -1) {
+                            arr.push(e.category)
+                        }
+                    })
+                    
+                    arr.sort()
+                    
+                    next(arr)
+                    
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
+        },
+        
         find: function (next) {
             $http.get("/api/getproducts")
                 .then(function (data) {
@@ -35,6 +56,16 @@ angular.module('ProductsService', []).factory('ProductsService', ['$http', "$loc
                 }, function (err) {
                     console.log(err)
                     next(false)
+                })
+        },
+        
+        findByCategory: function (category, next) {
+            $http.post("/api/findByCategory", {category: category})
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
                 })
         },
         

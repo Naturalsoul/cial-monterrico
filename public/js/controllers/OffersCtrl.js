@@ -27,7 +27,7 @@ angular.module("OffersCtrl", []).controller("OffersController", ["$scope", "$ngC
         })
         
         $scope.findProductInfoPriceByCode = function () {
-            if ($scope.productsInternalCodes.indexOf($scope.product.internalCode) != -1) {
+            if ($scope.productsInternalCodes.indexOf(parseInt($scope.product.internalCode)) != -1) {
                 OffersService.findProductInfoPriceByCode($scope.product.internalCode, function (res) {
                     $scope.product.name = res.name
                     $scope.product.originalPrice = res.sellPrice

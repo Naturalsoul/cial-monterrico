@@ -4,7 +4,7 @@ let Products = require("../models/products.model")
 module.exports = {
     insert: function (offer, next) {
         let newOffer = new Offers({
-            internalCodeProduct: offer.internalCodeProduct,
+            internalCodeProduct: parseInt(offer.internalCodeProduct),
             nameProduct: offer.nameProduct,
             percentage: offer.percentage,
             originalPrice: offer.originalPrice,
@@ -13,7 +13,7 @@ module.exports = {
         
         newOffer.save()
         
-        Products.update({internalCode: offer.internalCodeProduct}, {
+        Products.update({internalCode: parseInt(offer.internalCodeProduct)}, {
             offerPrice: offer.offerPrice
         }, function (err, data) {
             if (err) throw err
@@ -23,7 +23,7 @@ module.exports = {
     },
     
     findProductInfoPriceByCode: function (internalCode, next) {
-        Products.findOne({internalCode: internalCode}, "name minimumTotal sellPrice", function (err, data) {
+        Products.findOne({internalCode: parseInt(internalCode)}, "name minimumTotal sellPrice", function (err, data) {
             if (err) throw err
             
             if (data != null) {

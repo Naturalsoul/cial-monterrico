@@ -72,6 +72,26 @@ module.exports = function (app) {
             res.json([])
         }
     })
+    
+    app.get("/api/getcategories", function (req, res) {
+        if (req.session.logged) {
+            Products.findCategories(function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
+    
+    app.post("/api/findByCategory", function (req, res) {
+        if (req.session.logged) {
+            Products.findByCategory(req.body.category, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
      
     app.post("/api/inproducts", function (req, res) {
         if (req.session.logged) {

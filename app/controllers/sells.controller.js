@@ -12,7 +12,7 @@ module.exports = {
         newSell.save()
         
         sell.products.forEach(function (e) {
-            Products.update({internalCode: e.internalCode},
+            Products.update({internalCode: parseInt(e.internalCode)},
                             {$inc: {stock: (e.quantitySold * -1)}},
                             function (err, data) {
                                 if (err) throw err
@@ -38,7 +38,7 @@ module.exports = {
     },
     
     findProductInfoByCode: function (internalCode, next) {
-        Products.findOne({internalCode: internalCode}, "name stock minimumTotal sellPrice offerPrice" , function (err, data) {
+        Products.findOne({internalCode: parseInt(internalCode)}, "name stock minimumTotal sellPrice offerPrice" , function (err, data) {
             if (err) throw err
             
             if (data != null) {
@@ -78,7 +78,7 @@ module.exports = {
             if (err) throw err
             
             products.forEach(function (e) {
-                Products.update({internalCode: e.internalCode},
+                Products.update({internalCode: parseInt(e.internalCode)},
                                 {$inc: {stock: e.quantitySold}},
                                 function (err, data) {
                                     if (err) throw err

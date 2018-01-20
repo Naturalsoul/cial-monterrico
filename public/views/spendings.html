@@ -73,9 +73,9 @@
               <td class="align-middle text-center font-14">{{spending.title}}</td>
               <td class="align-middle text-center font-14"><button class="btn btn-primary" ng-click="showDetails(spending.details)">Ver Detalles</button></td>
               <td class="align-middle text-center font-14">{{spending.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
-              <td class="align-middle text-center font-14">$ {{spending.totalSpending}}</td>
+              <td class="align-middle text-center font-14 text-danger"><strong>{{spending.totalSpending | currency : undefined : 0}}</strong></td>
               <td class="align-middle text-center">
-                  <a ng-href="#" ng-click="removeSpending(spending.internalCode)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                  <a ng-href="#" ng-click="removeSpending(spending.internalCode)"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></a>
               </td>
           </tr>
         </tbody>

@@ -1,6 +1,6 @@
 <div ng-controller="ProductsController" ng-init="loadTableData()">
   <div class="row">
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-3">
       <div class="form-group">
           <label for="search">Buscar un Producto</label>
           <div class="input-group">
@@ -9,7 +9,33 @@
           </div>
       </div>
     </div>
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-3">
+      <div class="form-group">
+        <label for="categories">
+          Seleccionar una categoría
+        </label>
+        <div class="input-group">
+          <select class="form-control" ng-model="categorySelected">
+            <option ng-repeat="category in categories" ng-selected="categorySelected == category" ng-value="category">
+              {{category}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-3">
+      <div class="form-group">
+        <label for="searchData">
+          Buscar datos de productos
+        </label>
+        <div class="input-group">
+          <button type="button" ng-click="searchData()" class="btn btn-primary">
+            Buscar datos
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-3">
       <div class="form-group">
         <label for="export-excel">
           Exportar a Excel
@@ -43,14 +69,21 @@
           </th>
           <th scope="col" class="align-middle text-center">
             <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse" class="text-white">
-              Nombre del Producto
+              Nombre
               <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
               <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
             </a>
           </th>
           <th scope="col" class="align-middle text-center">
+            <a href="#" ng-click="sortType = 'category'; sortReverse = !sortReverse" class="text-white">
+              Categoría
+              <span ng-show="sortType == 'category' && !sortReverse" class="fa fa-caret-down"></span>
+              <span ng-show="sortType == 'category' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th scope="col" class="align-middle text-center">
             <a href="#" ng-click="sortType = 'provider'; sortReverse = !sortReverse" class="text-white">
-              Proveedor del Producto
+              Proveedor
               <span ng-show="sortType == 'provider' && !sortReverse" class="fa fa-caret-down"></span>
               <span ng-show="sortType == 'provider' && sortReverse" class="fa fa-caret-up"></span>
             </a>
@@ -128,14 +161,15 @@
             <th scope="row" class="align-middle text-center">{{product.internalCode}}</th>
             <td class="align-middle text-center font-14">{{product.providerCode}}</td>
             <td class="align-middle text-center font-14">{{product.name}}</td>
+            <td class="align-middle text-center font-14">{{product.category}}</td>
             <td class="align-middle text-center font-14">{{product.provider}}</td>
             <td class="align-middle text-center font-14">{{product.stock}}</td>
             <td class="align-middle text-center font-14">{{product.minimumStock}}</td>
-            <td class="align-middle text-center font-14">${{product.neto}}</td>
-            <td class="align-middle text-center font-14">${{product.iva}}</td>
-            <td class="align-middle text-center font-14">${{product.ivaNeto}}</td>
-            <td class="align-middle text-center font-14">${{product.minimumTotal}}</td>
-            <td class="align-middle text-center font-14">${{product.sellPrice}}</td>
+            <td class="align-middle text-center font-14">{{product.neto | currency : undefined : 0}}</td>
+            <td class="align-middle text-center font-14">{{product.iva | currency : undefined : 0}}</td>
+            <td class="align-middle text-center font-14">{{product.ivaNeto | currency : undefined : 0}}</td>
+            <td class="align-middle text-center font-14 text-warning"><strong>{{product.minimumTotal | currency : undefined : 0}}</strong></td>
+            <td class="align-middle text-center font-14 text-success"><strong>{{product.sellPrice | currency : undefined : 0}}</strong></td>
             <td class="align-middle text-center font-14">{{product.creationDate | date: "dd-MM-yyyy"}}</td>
             <td class="align-middle text-center font-14">
                 <span ng-if="product.state == true" class="badge badge-success">Activo</span>

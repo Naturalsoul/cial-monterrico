@@ -18,12 +18,24 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="product-code">Código Interno</label>
+                                        <label for="product-name">Nombre del Producto</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon" id="product-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
-                                            <input type="text" ng-model="formData.internalCode" class="form-control" placeholder="Codigo Interno del Producto" aria-label="Codigo Interno del Producto" aria-describedby="product-code-addon" id="product-code" required>
+                                            <span class="input-group-addon" id="product-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="formData.name" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="product-category">Categoría del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-category-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="formData.category" class="form-control" placeholder="Categoría del Producto" aria-label="Categoría del Producto" aria-describedby="product-category-addon" id="product-category" list="categoriesList" required>
+                                        </div>
+                                    </div>
+                                    <datalist id="categoriesList">
+                                        <option ng-repeat="category in categories" value="{{category}}"></option>
+                                    </datalist>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
@@ -31,15 +43,6 @@
                                         <div class="input-group">
                                             <span class="input-group-addon" id="product-proveedor-code-addon"><i class="fa fa-code" aria-hidden="true"></i></span>
                                             <input type="text" ng-model="formData.providerCode" class="form-control" placeholder="Codigo Proveedor del Producto" aria-label="Codigo Proveedor del Producto" aria-describedby="product-proveedor-code-addon" id="product-proveedor-code">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="product-name">Nombre del Producto</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="product-name-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
-                                            <input type="text" ng-model="formData.name" class="form-control" placeholder="Nombre del Producto" aria-label="Nombre del Producto" aria-describedby="product-name-addon" id="product-name" required>
                                         </div>
                                     </div>
                                 </div>

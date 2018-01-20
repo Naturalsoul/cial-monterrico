@@ -1,42 +1,24 @@
 let Products = require("../models/products.model")
 
 module.exports = {
-    exists: function (internalCode, next) {
-        Products.count({internalCode: internalCode}, function (err, count) {
-            if (err) throw err
-            
-            if (count > 0) {
-                next(true)
-            } else {
-                next(false)
-            }
-        })
-    },
-    
     insert: function (product, next) {
-        this.exists(product.internalCode, function (res) {
-            if (res) {
-                next({registered: false})
-            } else {
-                let newProduct = new Products({
-                    internalCode: product.internalCode,
-                    providerCode: product.providerCode,
-                    name: product.name,
-                    provider: product.provider,
-                    stock: product.stock,
-                    minimumStock: product.minimumStock,
-                    neto: product.neto,
-                    iva: product.iva,
-                    ivaNeto: product.ivaNeto,
-                    minimumTotal: product.minimumTotal,
-                    sellPrice: product.sellPrice
-                })
-                
-                newProduct.save()
-                
-                next({registered: true})
-            }
+        let newProduct = new Products({
+            providerCode: product.providerCode,
+            name: product.name.toUpperCase(),
+            category: product.category.toUpperCase(),
+            provider: product.provider,
+            stock: product.stock,
+            minimumStock: product.minimumStock,
+            neto: product.neto,
+            iva: product.iva,
+            ivaNeto: product.ivaNeto,
+            minimumTotal: product.minimumTotal,
+            sellPrice: product.sellPrice
         })
+        
+        newProduct.save()
+        
+        next({registered: true})
     },
     
     find: function (next) {
@@ -52,7 +34,7 @@ module.exports = {
     },
     
     findOne: function (internalCode, next) {
-        Products.findOne({internalCode: internalCode}, function (err, data) {
+        Products.findOne({internalCode: parseInt(internalCode)}, function (err, data) {
             if (err) throw err
             
             if (data != null) {
@@ -75,11 +57,36 @@ module.exports = {
         })
     },
     
+    findCategories: function (next) {
+        Products.find({}, "category", function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next(data)
+            } else {
+                next({})
+            }
+        })
+    },
+    
+    findByCategory: function (category, next ) {
+        Products.find({category: category}, function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next(data)
+            } else {
+                next({})
+            }
+        })
+    },
+    
     update: function (product, next) {
-        Products.update({internalCode: product.internalCode}, {
+        Products.update({internalCode: parseInt(product.internalCode)}, {
             $set: {
                 providerCode: product.providerCode,
-                name: product.name,
+                name: product.name.toUpperCase(),
+                category: product.category.toUpperCase(),
                 provider: product.provider,
                 stock: product.stock,
                 minimumStock: product.minimumStock,
@@ -98,7 +105,7 @@ module.exports = {
     },
     
     disable: function (internalCode, next) {
-        Products.update({internalCode: internalCode}, {
+        Products.update({internalCode: parseInt(internalCode)}, {
             $set: {state: false}
         }, function (err, data) {
             if (err) throw err
@@ -108,7 +115,7 @@ module.exports = {
     },
     
     remove: function (internalCode, next) {
-        Products.remove({internalCode: internalCode}, function (err, data) {
+        Products.remove({internalCode: parseInt(internalCode)}, function (err, data) {
             if (err) throw err
             
             if (data != null) {

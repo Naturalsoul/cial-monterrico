@@ -87,11 +87,11 @@
               <td class="align-middle text-center font-14">{{offer.internalCodeProduct}}</td>
               <td class="align-middle text-center font-14">{{offer.nameProduct}}</td>
               <td class="align-middle text-center font-14">{{offer.percentage}} %</td>
-              <td class="align-middle text-center font-14">$ {{offer.offerPrice}}</td>
-              <td class="align-middle text-center font-14">$ {{offer.originalPrice}}</td>
+              <td class="align-middle text-center font-14 text-success"><strong>{{offer.offerPrice | currency : undefined : 0}}</strong></td>
+              <td class="align-middle text-center font-14 text-primary"><strong>{{offer.originalPrice | currency : undefined : 0}}</strong></td>
               <td class="align-middle text-center font-14">{{offer.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
               <td class="align-middle text-center">
-                  <a ng-href="#" ng-click="removeOffer(offer.internalCode, offer.internalCodeProduct, offer.originalPrice)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                  <a ng-href="#" ng-click="removeOffer(offer.internalCode, offer.internalCodeProduct, offer.originalPrice)"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></a>
               </td>
           </tr>
         </tbody>

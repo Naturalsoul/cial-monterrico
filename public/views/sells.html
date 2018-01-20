@@ -65,9 +65,9 @@
               <th scope="row" class="align-middle text-center">{{sell.internalCode}}</th>
               <td class="align-middle text-center font-14"><button class="btn btn-primary" ng-click="showProducts(sell.products)">Ver Productos</button></td>
               <td class="align-middle text-center font-14">{{sell.creationDate | date: "dd-MM-yyyy HH:mm:ss"}}</td>
-              <td class="align-middle text-center font-14">$ {{sell.totalPrice}}</td>
+              <td class="align-middle text-center font-14 text-success"><strong>{{sell.totalPrice | currency : undefined : 0}}</strong></td>
               <td class="align-middle text-center">
-                  <a ng-href="#" ng-click="removeSell(sell.internalCode, sell.products)"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                  <a ng-href="#" ng-click="removeSell(sell.internalCode, sell.products)"><i class="fa fa-times-circle text-danger" aria-hidden="true"></i></a>
               </td>
           </tr>
         </tbody>

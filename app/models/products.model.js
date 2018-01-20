@@ -1,9 +1,14 @@
 var db = require("./../../config/db")
+let Schema = require("mongoose").Schema
+let autoIncrement = require("mongoose-auto-increment")
 
-module.exports = db.model("Products", {
-    internalCode: String,
+autoIncrement.initialize(db)
+
+let ProductsSchema = new Schema ({
+    internalCode: Number,
     providerCode: {type: String, default: ""},
     name: String,
+    category: String,
     provider: String,
     neto: {type: Number, min: 1},
     iva: {type: Number, min: 1},
@@ -16,3 +21,12 @@ module.exports = db.model("Products", {
     state: {type: Boolean, default: true},
     creationDate: {type: Date, default: Date.now}
 })
+
+ProductsSchema.plugin(autoIncrement.plugin, {
+    model: "Products",
+    field: "internalCode",
+    startAt: 11742,
+    incrementBy: 1
+})
+
+module.exports = db.model("Products", ProductsSchema)
