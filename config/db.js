@@ -1,7 +1,7 @@
 let mongoose = require("mongoose")
 mongoose.Promise = global.Promise;
 
-mongoose.connect("mongodb://localhost:27017/cial-monterrico");
+mongoose.connect("mongodb://127.0.0.1:27017/cial-monterrico");
 var db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "Connection error:"));
