@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt-nodejs")
 let Users = require("../models/users.model")
 
 module.exports = {
