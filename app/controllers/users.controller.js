@@ -35,7 +35,7 @@ module.exports = {
     },
     
     signup: function (userName, password, next) {
-        bcrypt.hash(password, 10, function (err, hash) {
+        bcrypt.hash(password, 10, null, function (err, hash) {
             if (err) {
                 throw err
             }
