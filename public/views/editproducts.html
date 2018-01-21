@@ -45,6 +45,18 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label for="product-category">Categoría del Producto</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="product-category-addon"><i class="fa fa-font" aria-hidden="true"></i></span>
+                                            <input type="text" ng-model="formData.category" class="form-control" placeholder="Categoría del Producto" aria-label="Categoría del Producto" aria-describedby="product-category-addon" id="product-category" list="categoriesList" required>
+                                        </div>
+                                    </div>
+                                    <datalist id="categoriesList">
+                                        <option ng-repeat="category in categories" value="{{category}}"></option>
+                                    </datalist>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                         <label for="product-provider">Proveedor del Producto</label>
                                         <div class="input-group">
                                             <span class="input-group-addon" id="product-provider-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
