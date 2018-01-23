@@ -74,6 +74,8 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
                      $scope.product.price >= 1 &&
                      $scope.product.price >= $scope.product.minimumTotal
                      
+            console.log($scope.product.quantitySold > 0)
+                     
             for (let i = 0; i < $scope.formData.products.length; i++) {
                 if ($scope.formData.products[i].internalCode == $scope.product.internalCode) {
                     ok = false
