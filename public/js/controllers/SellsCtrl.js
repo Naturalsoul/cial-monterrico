@@ -69,7 +69,7 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
             let ok = $scope.productsInternalCode.indexOf(parseInt($scope.product.internalCode)) != -1 &&
                      $scope.productsName.indexOf($scope.product.name) != -1 &&
                      $scope.product.stock >= 1 &&
-                     $scope.product.quantitySold >= $scope.product.stock &&
+                     $scope.product.quantitySold <= $scope.product.stock &&
                      $scope.product.price >= 1 &&
                      $scope.product.price >= $scope.product.minimumTotal
                      
