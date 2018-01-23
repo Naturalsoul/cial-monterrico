@@ -66,7 +66,7 @@ angular.module("SellsCtrl", ["cp.ngConfirm"]).controller("SellsController", ["$s
         }
         
         $scope.addProduct = function () {
-            let ok = $scope.productsInternalCode.indexOf($scope.product.internalCode) != -1 &&
+            let ok = $scope.productsInternalCode.indexOf(parseInt($scope.product.internalCode)) != -1 &&
                      $scope.productsName.indexOf($scope.product.name) != -1 &&
                      $scope.product.stock >= 1 &&
                      $scope.product.quantitySold >= $scope.product.stock &&
