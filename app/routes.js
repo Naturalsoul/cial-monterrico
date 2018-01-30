@@ -92,6 +92,16 @@ module.exports = function (app) {
             res.json([])
         }
     })
+    
+    app.post("/api/findbycode", function (req, res) {
+        if (req.session.logged) {
+            Products.findByCode(req.body.internalCode, function (results) {
+                res.json(results)
+            })
+        } else {
+            res.json([])
+        }
+    })
      
     app.post("/api/inproducts", function (req, res) {
         if (req.session.logged) {

@@ -69,6 +69,16 @@ angular.module('ProductsService', []).factory('ProductsService', ['$http', "$loc
                 })
         },
         
+        findByCode: function (internalCode, next) {
+            $http.post("/api/findbycode", {internalCode: internalCode})
+                .then(function (data) {
+                    next(data.data)
+                }, function (err) {
+                    console.log(err)
+                    next([])
+                })
+        },
+        
         findOne: function (productCode, next) {
             $http.post("/api/getproduct", {internalCode: productCode})
                 .then(function (data) {

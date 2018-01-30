@@ -69,8 +69,20 @@ module.exports = {
         })
     },
     
-    findByCategory: function (category, next ) {
+    findByCategory: function (category, next) {
         Products.find({category: category}, function (err, data) {
+            if (err) throw err
+            
+            if (data != null) {
+                next(data)
+            } else {
+                next({})
+            }
+        })
+    },
+    
+    findByCode: function (internalCode, next) {
+        Products.find({internalCode: internalCode}, function (err, data) {
             if (err) throw err
             
             if (data != null) {

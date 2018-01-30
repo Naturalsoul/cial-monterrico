@@ -66,6 +66,7 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
         })
         
         $scope.categorySelected = ""
+        $scope.searchByCode = ""
         
         $scope.searchData = function () {
             if ($scope.categorySelected != "" && $scope.categorySelected != "TODOS") {
@@ -90,6 +91,20 @@ angular.module("ProductsCtrl", ["cp.ngConfirm"]).controller("ProductsController"
                 
             } else {
                 $ngConfirm("Debe seleccionar una Categoría", "Que mal :(")
+            }
+        }
+        
+        $scope.searchDataByCode = function () {
+            if ($scope.searchByCode.length > 0 && !isNaN($scope.searchByCode)) {
+                ProductsService.findByCode($scope.searchByCode, function (res) {
+                    $scope.products = res
+                    
+                    $scope.products.forEach(function (e) {
+                        e.sellPrice = (e.offerPrice != 0 || (typeof e.offerPrice != "undefined" && e.offerPrice != 0)) ? e.offerPrice : e.sellPrice
+                    })
+                })
+            } else {
+                $ngConfirm("Debe ingresar un Código Interno de Producto válido", "Que mal :(")
             }
         }
         
