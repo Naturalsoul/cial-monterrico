@@ -14,7 +14,7 @@ module.exports = {
                         throw err
                     }
                     
-                    if (data != null) {
+                    if (data) {
                         next(true)
                     } else {
                         next(false)
